@@ -4,3 +4,14 @@ export const toggleLove = (id) => {
         id
     }
 }
+
+export const addComment = (id, user, comment) => {
+    return {
+        type: 'ADD_COMMENT',
+        id,
+        commentContent: {
+            user: user,
+            content: comment
+        }
+    }
+}

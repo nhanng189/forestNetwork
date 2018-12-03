@@ -6,13 +6,14 @@ const initState = [
     time: "An hour ago",
     title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce placerat fringilla odio vitae gravida.！",
     images: ["https://pbs.twimg.com/media/Drtt3q7X4AAkJwH.jpg:large"],
+    tags: ["girl", "sexy"],
     love: 12,
     comment: 3,
     loved: false,
     commentContent: [
       {
-        user: "",
-        content: ""
+        user: "Akane",
+        content: "Nice"
       }
     ]
   },
@@ -23,13 +24,14 @@ const initState = [
     time: "An hour ago",
     title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce placerat fringilla odio vitae gravida.！",
     images: ["https://pbs.twimg.com/media/Drtt3q7X4AAkJwH.jpg:large"],
+    tags: ["girl", "sexy"],
     love: 45,
     comment: 2,
     loved: false,
     commentContent: [
       {
-        user: "",
-        content: ""
+        user: "Akane",
+        content: "Nice"
       }
     ]
   },
@@ -40,13 +42,14 @@ const initState = [
     time: "An hour ago",
     title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce placerat fringilla odio vitae gravida.！",
     images: ["https://pbs.twimg.com/media/Drtt3q7X4AAkJwH.jpg:large"],
+    tags: ["girl", "sexy"],
     love: 8,
     comment: 4,
     loved: false,
     commentContent: [
       {
-        user: "",
-        content: ""
+        user: "Akane",
+        content: "Nice"
       }
     ]
   },
@@ -57,13 +60,14 @@ const initState = [
     time: "An hour ago",
     title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce placerat fringilla odio vitae gravida.！",
     images: ["https://pbs.twimg.com/media/Drtt3q7X4AAkJwH.jpg:large"],
+    tags: ["girl", "sexy"],
     love: 32,
     comment: 4,
     loved: false,
     commentContent: [
       {
-        user: "",
-        content: ""
+        user: "Akane",
+        content: "Nice"
       }
     ]
   },
@@ -74,13 +78,14 @@ const initState = [
     time: "An hour ago",
     title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce placerat fringilla odio vitae gravida.！",
     images: ["https://pbs.twimg.com/media/Drtt3q7X4AAkJwH.jpg:large"],
+    tags: ["girl", "sexy"],
     love: 1,
     comment: 12,
     loved: false,
     commentContent: [
       {
-        user: "",
-        content: ""
+        user: "Akane",
+        content: "Nice"
       }
     ]
   },
@@ -91,13 +96,14 @@ const initState = [
     time: "An hour ago",
     title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce placerat fringilla odio vitae gravida.！",
     images: ["https://pbs.twimg.com/media/Drtt3q7X4AAkJwH.jpg:large"],
+    tags: ["girl", "sexy"],
     love: 4,
     comment: 7,
     loved: false,
     commentContent: [
       {
-        user: "",
-        content: ""
+        user: "Akane",
+        content: "Nice"
       }
     ]
   },
@@ -108,13 +114,14 @@ const initState = [
     time: "An hour ago",
     title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce placerat fringilla odio vitae gravida.！",
     images: ["https://pbs.twimg.com/media/Drtt3q7X4AAkJwH.jpg:large"],
+    tags: ["girl", "sexy"],
     love: 65,
     comment: 8,
     loved: false,
     commentContent: [
       {
-        user: "",
-        content: ""
+        user: "Akane",
+        content: "Nice"
       }
     ]
   }
@@ -136,6 +143,16 @@ const myPosts = (state = initState, action) => {
         }
         return post;
       })
+
+    case 'ADD_COMMENT':
+      return state.map((post) => {
+        if (post.id == action.id) {
+          post.commentContent.push(action.commentContent);
+          post.comment = post.comment + 1;
+        }
+        return post;
+      })
+
     default:
       return state
   }

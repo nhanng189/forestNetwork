@@ -13,7 +13,7 @@ class Header extends Component {
       <div>
         <Card style={{ marginTop: "90px", height: "320px" }}>
           <div style={{ zIndex: "1000", position: "absolute", marginLeft: "184px", marginTop: "150px" }}>
-            <Avatar style={{ float: "left", width: "200px", height: "200px" }} alt="" src={this.props.myProfile.avatar} />
+            <Avatar style={{border: "5px white solid", float: "left", width: "200px", height: "200px" }} alt="" src={this.props.myProfile.avatar} />
             <div style={{ float: "left", fontSize: "35px", fontWeight: "bolder", marginLeft: "50px", marginTop: "25px" }}>{this.props.myProfile.name}</div>
           </div>
           <CardMedia style={{ height: "250px" }}

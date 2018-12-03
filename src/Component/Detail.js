@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { toggleLove, addComment } from '../actions'
 import Navibar from './Navibar';
 import Avatar from '@material-ui/core/Avatar'
 import Card from '@material-ui/core/Card';
@@ -21,239 +23,25 @@ class Detail extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      comment: "",
-      index: 0,
-      users: [
-        {
-          avatar: "https://pbs.twimg.com/profile_images/733142049864585216/IzFb9HCz_400x400.jpg",
-          user: "Fumika Chan",
-          time: "An hour ago",
-          title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce placerat fringilla odio vitae gravida.",
-          images: ["https://pbs.twimg.com/media/Drtt3q7X4AAkJwH.jpg:large"],
-          tags: ["1", "2", "3"],
-          love: 12,
-          comment: 2,
-          check: 9,
-          loved: false,
-          checked: false,
-          commentContent: [
-            {
-              user: "Daigo",
-              content: "I love you"
-            },
-            {
-              user: "Yasuo",
-              content: "Pretty girl"
-            }
-          ]
-        },
-        {
-          avatar: "https://pbs.twimg.com/profile_images/733142049864585216/IzFb9HCz_400x400.jpg",
-          user: "Fumika Chan",
-          time: "An hour ago",
-          title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce placerat fringilla odio vitae gravida.！",
-          images: ["https://pbs.twimg.com/media/Drtt3q7X4AAkJwH.jpg:large"],
-          tags: ["1", "2", "3"],
-          love: 45,
-          comment: 2,
-          check: 7,
-          loved: false,
-          checked: false,
-          commentContent: [
-            {
-              user: "Daigo",
-              content: "I love you"
-            },
-            {
-              user: "Yasuo",
-              content: "Pretty girl"
-            }
-          ]
-        },
-        {
-          avatar: "https://pbs.twimg.com/profile_images/733142049864585216/IzFb9HCz_400x400.jpg",
-          user: "Fumika Chan",
-          time: "An hour ago",
-          title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce placerat fringilla odio vitae gravida.！",
-          images: ["https://pbs.twimg.com/media/Drtt3q7X4AAkJwH.jpg:large"],
-          tags: ["1", "2", "3"],
-          love: 8,
-          comment: 2,
-          check: 7,
-          loved: false,
-          checked: false,
-          commentContent: [
-            {
-              user: "Daigo",
-              content: "I love you"
-            },
-            {
-              user: "Yasuo",
-              content: "Pretty girl"
-            }
-          ]
-        },
-        {
-          avatar: "https://pbs.twimg.com/profile_images/733142049864585216/IzFb9HCz_400x400.jpg",
-          user: "Fumika Chan",
-          time: "An hour ago",
-          title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce placerat fringilla odio vitae gravida.！",
-          images: ["https://pbs.twimg.com/media/Drtt3q7X4AAkJwH.jpg:large"],
-          tags: ["1", "2", "3"],
-          love: 32,
-          comment: 2,
-          check: 7,
-          loved: false,
-          checked: false,
-          commentContent: [
-            {
-              user: "Daigo",
-              content: "I love you"
-            },
-            {
-              user: "Yasuo",
-              content: "Pretty girl"
-            }
-          ]
-        },
-        {
-          avatar: "https://pbs.twimg.com/profile_images/733142049864585216/IzFb9HCz_400x400.jpg",
-          user: "Fumika Chan",
-          time: "An hour ago",
-          title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce placerat fringilla odio vitae gravida.！",
-          images: ["https://pbs.twimg.com/media/Drtt3q7X4AAkJwH.jpg:large"],
-          tags: ["1", "2", "3"],
-          love: 1,
-          comment: 22,
-          check: 45,
-          loved: false,
-          checked: false,
-          commentContent: [
-            {
-              user: "Daigo",
-              content: "I love you"
-            },
-            {
-              user: "Yasuo",
-              content: "Pretty girl"
-            }
-          ]
-        },
-        {
-          avatar: "https://pbs.twimg.com/profile_images/733142049864585216/IzFb9HCz_400x400.jpg",
-          user: "Fumika Chan",
-          time: "An hour ago",
-          title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce placerat fringilla odio vitae gravida.！",
-          images: ["https://pbs.twimg.com/media/Drtt3q7X4AAkJwH.jpg:large"],
-          tags: ["1", "2", "3"],
-          love: 4,
-          comment: 2,
-          check: 69,
-          loved: false,
-          checked: false,
-          commentContent: [
-            {
-              user: "Daigo",
-              content: "I love you"
-            },
-            {
-              user: "Yasuo",
-              content: "Pretty girl"
-            }
-          ]
-        },
-        {
-          avatar: "https://pbs.twimg.com/profile_images/733142049864585216/IzFb9HCz_400x400.jpg",
-          user: "Fumika Chan",
-          time: "An hour ago",
-          title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce placerat fringilla odio vitae gravida.！",
-          images: ["https://pbs.twimg.com/media/Drtt3q7X4AAkJwH.jpg:large"],
-          tags: ["1", "2", "3"],
-          love: 65,
-          comment: 2,
-          check: 12,
-          loved: false,
-          checked: false,
-          commentContent: [
-            {
-              user: "Daigo",
-              content: "I love you"
-            },
-            {
-              user: "Yasuo",
-              content: "Pretty girl"
-            }
-          ]
-        }
-      ]
+      comment: ""
     }
   }
 
-  componentWillMount() {
-    this.setState({
-      index: this.props.match.params.id
-    })
-  }
-
-  toggleLove = () => {
-    let clone = [...this.state.users];
-    clone.forEach((user, index) => {
-      if (index == this.state.index) {
-        if (user.loved === false) {
-          user.loved = true;
-          user.love = user.love + 1;
-        }
-        else {
-          user.loved = false;
-          user.love = user.love - 1;
-        }
+  getPost = () => {
+    let thisPost = null;
+    this.props.myPosts.forEach((post) => {
+      if (post.id == this.props.match.params.id) {
+        thisPost = post
       }
     })
-    this.setState({
-      users: clone
-    })
-  }
-
-  toggleCheck = () => {
-    let clone = [...this.state.users];
-    clone.forEach((user, index) => {
-      if (index == this.state.index) {
-        if (user.checked === false) {
-          user.checked = true;
-          user.check = user.check + 1;
-        }
-        else {
-          user.checked = false;
-          user.check = user.check - 1;
-        }
-      }
-    })
-    this.setState({
-      users: clone
-    })
-  }
-
-  addComment = (event) => {
-    let commnets = this.state.commentContent;
-    commnets.push(event.target.value);
-    this.setState({ commentContent: commnets });
+    return thisPost;
   }
 
   onSubmit = (event) => {
     event.preventDefault();
-    let clone = [...this.state.users];
-    clone.forEach((user, index) => {
-      if (index == this.state.index) {
-        user.commentContent.push({
-          user: "Sudo",
-          content: this.state.comment
-        });
-        user.comment = user.comment + 1;
-      }
-    })
+    this.props.addComment(this.props.match.params.id, "Fumika", this.state.comment)
     this.setState({
-      comment: "",
-      users: clone
+      comment: ""
     })
   }
 
@@ -267,12 +55,9 @@ class Detail extends Component {
     })
   }
 
-  showComment = () => {
-    this.setState({ showcomment: !this.state.showcomment });
-  }
-
   detailComment = () => {
-    let comments = this.state.users[this.state.index].commentContent.map((comment) => {
+    let post = this.getPost();
+    let comments = post.commentContent.map((comment) => {
       return (
         <div style={{ height: "30px", marginBottom: "5px", padding: "10px" }}>
           <div style={{ fontWeight: "bold", float: "left" }}>
@@ -306,12 +91,10 @@ class Detail extends Component {
   }
 
   render() {
-    // let elements = this.state.users[this.state.index].images.map((image) => {
-    //   return <img alt="" src={image} />
-    // })
-
+    let post = this.getPost();
     let color = "primary";
-    let tags = this.state.users[this.state.index].tags.map((tag) => {
+
+    let tags = post.tags.map((tag) => {
       if (color === "default") color = "primary";
       else if (color === "primary") color = "secondary";
       else color = "default";
@@ -323,31 +106,29 @@ class Detail extends Component {
     return (
       <div>
         <Navibar />
-        <Grid style={{ marginTop: "50px" }} container spacing={32}>
+        <Grid style={{ marginTop: "90px" }} container spacing={32}>
           <Grid item xs={2} />
-
           <Grid className="grid" item xs={8}>
             <Card>
               <CardContent>
                 <CardMedia
                   className="tlp-card-media"
-                  image={this.state.users[this.state.index].images[0]}
+                  image={post.images[0]}
                 >
                 </CardMedia>
               </CardContent>
-
               <Grid container spacing={8}>
                 <Grid item xs={6}>
                   <CardContent>
                     <div style={{ marginBottom: "20px", height: "55px" }}>
-                      <Avatar style={{ float: "left", width: "55px", height: "55px" }} src={this.state.users[this.state.index].avatar} />
+                      <Avatar style={{ float: "left", width: "55px", height: "55px" }} src={post.avatar} />
                       <div style={{ float: "left", marginLeft: "15px" }}>
-                        <div style={{ fontWeight: "bold", marginBottom: "5px", marginTop: "5px" }}>{this.state.users[this.state.index].user}</div>
-                        <div>{this.state.users[this.state.index].time}</div>
+                        <div style={{ fontWeight: "bold", marginBottom: "5px", marginTop: "5px" }}>{post.user}</div>
+                        <div>{post.time}</div>
                       </div>
                     </div>
                     <div style={{ padding: "10px 0 15px 0" }}>
-                      {this.state.users[this.state.index].title}
+                      {post.title}
                     </div>
                     <div>
                       {tags}
@@ -355,23 +136,17 @@ class Detail extends Component {
                   </CardContent>
                   <CardActions disableActionSpacing className="tlp-card-action" style={{ marginBottom: "10px" }}>
                     <div className="tlp-action-field">
-                      <IconButton disableRipple="true" disableTouchRipple="true" className="tlp-action-icon" onClick={this.toggleLove}>
-                        <img className="tlp-action-icon-img" alt="" src={this.state.users[this.state.index].loved ? Love4 : Love3} />
+                      <IconButton disableRipple="true" disableTouchRipple="true" className="tlp-action-icon" onClick={() => this.props.toggleLove(post.id)}>
+                        <img className="tlp-action-icon-img" alt="" src={post.loved ? Love4 : Love3} />
                       </IconButton>
-                      {this.state.users[this.state.index].loved ? `Loved ${this.state.users[this.state.index].love}` : `Love ${this.state.users[this.state.index].love}`}
-                    </div>
-                    <div className="tlp-action-field">
-                      <IconButton disableRipple="true" disableTouchRipple="true" className="tlp-action-icon" onClick={this.toggleCheck}>
-                        <img className="tlp-action-icon-img" alt="" src={this.state.users[this.state.index].checked ? Check1 : Check0} />
-                      </IconButton>
-                      {this.state.users[this.state.index].checked ? `Checked ${this.state.users[this.state.index].check}` : `Check ${this.state.users[this.state.index].check}`}
+                      {post.loved ? `Loved ${post.love}` : `Love ${post.love}`}
                     </div>
                     <div style={{ flexGrow: "1" }} />
                     <div className="tlp-action-field">
-                      <IconButton disableRipple="true" disableTouchRipple="true" className="tlp-action-icon" onClick={this.showComment}>
+                      <IconButton disableRipple="true" disableTouchRipple="true" className="tlp-action-icon">
                         <img className="tlp-action-icon-img" alt="" src={Comment} />
                       </IconButton>
-                      {`Comment ${this.state.users[this.state.index].comment}`}
+                      {`Comment ${post.comment}`}
                     </div>
                   </CardActions>
                 </Grid>
@@ -379,7 +154,6 @@ class Detail extends Component {
                   {this.detailComment()}
                 </Grid>
               </Grid>
-              {/* {this.state.showcomment ? this.detailComment() : ""} */}
             </Card>
           </Grid>
 
@@ -390,4 +164,16 @@ class Detail extends Component {
   }
 }
 
-export default Detail;
+const mapStateToProps = state => ({
+  myPosts: state.myPosts
+})
+
+const mapDispatchToProps = dispatch => ({
+  toggleLove: id => dispatch(toggleLove(id)),
+  addComment: (id, user, comment) => dispatch(addComment(id, user, comment))
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Detail)
