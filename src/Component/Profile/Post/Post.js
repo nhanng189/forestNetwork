@@ -102,7 +102,7 @@ class Post extends Component {
         <div style={{ padding: "0 15px 0 15px" }}><hr /></div>
         <CardActions disableActionSpacing className="tlp-card-action-comment">
           <form style={{ width: "100%" }} onSubmit={this.onSubmit}>
-            <InputBase style={{ fontSize: "15px" }} fullWidth placeholder="Add your comment ..."
+            <InputBase style={{ fontSize: "14px" }} fullWidth placeholder="Add your comment ..."
               name="comment" value={this.state.comment} type="text" onChange={this.onChange} />
           </form>
         </CardActions>

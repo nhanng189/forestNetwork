@@ -8,6 +8,7 @@ import { CardActions } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import EditIcon from '@material-ui/icons/Create';
+
 import FollowingDialog from '../Following';
 import FollowersDialog from '../Followers';
 import EditDialog from '../Edit';
@@ -70,21 +71,21 @@ class Header extends Component {
           </CardMedia>
           <CardActions >
             <div style={{ zIndex: "1001", marginLeft: "420px" }}>
-              <Button style={{ fontSize: "13px", width: "100px" }}>
+              <Button style={{ fontSize: "11px", width: "100px" }}>
                 <div>
                   Post
                   <br />
                   {this.props.myPosts.length}
                 </div>
               </Button>
-              <Button style={{ fontSize: "13px", width: "100px" }} onClick={this.handleFollowersOpen}>
+              <Button style={{ fontSize: "11px", width: "100px" }} onClick={this.handleFollowersOpen}>
                 <div>
                   Follower
                   <br />
                   {this.props.myFollowers.length}
                 </div>
               </Button>
-              <Button style={{ fontSize: "13px", width: "100px" }} onClick={this.handleFollowingOpen}>
+              <Button style={{ fontSize: "11px", width: "100px" }} onClick={this.handleFollowingOpen}>
                 <div>
                   Following
                   <br />

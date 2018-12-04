@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { toggleLove, addComment } from '../actions'
+
 import Navibar from './Navibar';
+
 import Avatar from '@material-ui/core/Avatar'
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -11,6 +13,7 @@ import Chip from '@material-ui/core/Chip';
 import IconButton from '@material-ui/core/IconButton';
 import TextField from '@material-ui/core/TextField';
 import CardMedia from '@material-ui/core/CardMedia';
+
 import Love3 from '../icons/love3.png';
 import Love4 from '../icons/love4.png';
 import Comment from '../icons/comment.png';
@@ -79,7 +82,7 @@ class Detail extends Component {
             variant="outlined"
             placeholder="Add your comment ..."
             InputProps={{
-              style: { fontSize: "16px", height: "40px" }
+              style: { fontSize: "14px", height: "40px" }
             }}
             onChange={this.onChange}
           />
@@ -98,7 +101,7 @@ class Detail extends Component {
       else if (color === "primary") color = "secondary";
       else color = "default";
       return (
-        <Chip color={color} label={tag} style={{ fontSize: "13px", height: "20px", margin: "5px 5px 0 0" }} />
+        <Chip color={color} label={tag} style={{ fontSize: "11px", height: "20px", margin: "5px 5px 0 0" }} />
       )
     })
 

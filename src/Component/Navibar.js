@@ -14,9 +14,9 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import Badge from '@material-ui/core/Badge';
 import Avatar from '@material-ui/core/Avatar';
 import AddIcon from '@material-ui/icons/Add';
-import '../Style/Navibar.css';
 
 import Logo1 from '../icons/logo1.png';
+import '../Style/Navibar.css';
 
 class Navibar extends Component {
   render() {
@@ -52,8 +52,8 @@ class Navibar extends Component {
                 </Badge>
               </IconButton>
               <Button className="page-button" disabled color="inherit">|</Button>
-              <Avatar src="https://vinagamemobile.com/wp-content/uploads/2018/04/avatar-doi-fb-01.jpg"></Avatar>
-              <Button style={{ height: "35px", backgroundColor: "#a000a5", fontSize: "12px", color: "white", padding: "2px 10px 2px 7px", marginLeft: "25px" }} variant="contained" onClick={this.selectedPickImage}>
+              <Avatar src="https://pbs.twimg.com/profile_images/733142049864585216/IzFb9HCz_400x400.jpg"></Avatar>
+              <Button style={{ height: "35px", backgroundColor: "#a000a5", fontSize: "11px", color: "white", padding: "2px 10px 2px 7px", marginLeft: "25px" }} variant="contained" onClick={this.selectedPickImage}>
                 <AddIcon />New post
               </Button>
             </Toolbar>

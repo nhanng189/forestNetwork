@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+
 import Avatar from '@material-ui/core/Avatar';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -19,7 +20,7 @@ class FollowingDialog extends React.Component {
     return (
       <Dialog onClose={this.handleClose} {...other}>
         <List>
-          <ListSubheader style={{ fontSize: "18px", backgroundColor: "white", width: "250px" }}>Following people</ListSubheader>
+          <ListSubheader style={{ fontSize: "16px", backgroundColor: "white", width: "250px" }}>Following people</ListSubheader>
           {this.props.myFollowing.map((following) => {
             return (
               <ListItem style={{ marginBottom: "5px" }} button>
@@ -27,7 +28,7 @@ class FollowingDialog extends React.Component {
                   <Avatar alt="" src={following.avatar} />
                 </ListItemAvatar>
                 <ListItemText>
-                  <div style={{ fontSize: "13px" }}>{following.name}</div>
+                  <div style={{ fontSize: "11px" }}>{following.name}</div>
                 </ListItemText>
               </ListItem>
             )
