@@ -14,6 +14,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import InputBase from '@material-ui/core/InputBase';
 
 import Love3 from '../../../icons/love3.png';
+import Share from '../../../icons/share.png';
 import Love4 from '../../../icons/love4.png';
 import Comment from '../../../icons/comment.png';
 import '../../../Style/TimelinePost.css';
@@ -57,6 +58,12 @@ class Post extends Component {
               <img className="tlp-action-icon-img" alt="" src={this.props.loved ? Love4 : Love3} />
             </IconButton>
             {this.props.loved ? `Loved ${this.props.love}` : `Love ${this.props.love}`}
+          </div>
+          <div className="tlp-action-field">
+            <IconButton disableRipple="true" disableTouchRipple="true" className="tlp-action-icon" >
+              <img className="tlp-action-icon-img" alt="" src={Share} />
+            </IconButton>
+            Share
           </div>
           <div style={{ flexGrow: "1" }} />
           <div className="tlp-action-field">

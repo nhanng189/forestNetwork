@@ -14,8 +14,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Love3 from '../icons/love3.png';
 import Love4 from '../icons/love4.png';
 import Comment from '../icons/comment.png';
-import Check0 from '../icons/check0.png';
-import Check1 from '../icons/check1.png';
+import Share from '../icons/share.png';
 import '../Style/Detail.css';
 
 class Detail extends Component {
@@ -140,6 +139,12 @@ class Detail extends Component {
                         <img className="tlp-action-icon-img" alt="" src={post.loved ? Love4 : Love3} />
                       </IconButton>
                       {post.loved ? `Loved ${post.love}` : `Love ${post.love}`}
+                    </div>
+                    <div className="tlp-action-field">
+                      <IconButton disableRipple="true" disableTouchRipple="true" className="tlp-action-icon" >
+                        <img className="tlp-action-icon-img" alt="" src={Share} />
+                      </IconButton>
+                      Share
                     </div>
                     <div style={{ flexGrow: "1" }} />
                     <div className="tlp-action-field">

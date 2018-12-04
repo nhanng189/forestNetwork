@@ -53,7 +53,7 @@ class Navibar extends Component {
               </IconButton>
               <Button className="page-button" disabled color="inherit">|</Button>
               <Avatar src="https://vinagamemobile.com/wp-content/uploads/2018/04/avatar-doi-fb-01.jpg"></Avatar>
-              <Button style={{ height: "35px", backgroundColor: "#a000a5", fontSize: "15px", color: "white", padding: "2px 10px 2px 7px", marginLeft: "25px" }} variant="contained" onClick={this.selectedPickImage}>
+              <Button style={{ height: "35px", backgroundColor: "#a000a5", fontSize: "12px", color: "white", padding: "2px 10px 2px 7px", marginLeft: "25px" }} variant="contained" onClick={this.selectedPickImage}>
                 <AddIcon />New post
               </Button>
             </Toolbar>
