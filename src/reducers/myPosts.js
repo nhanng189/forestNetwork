@@ -8,7 +8,7 @@ const initState = [
     images: ["https://pbs.twimg.com/media/Drtt3q7X4AAkJwH.jpg:large"],
     tags: ["girl", "sexy"],
     love: 12,
-    comment: 3,
+    comment: 1,
     loved: false,
     commentContent: [
       {
@@ -26,7 +26,7 @@ const initState = [
     images: ["https://pbs.twimg.com/media/Drtt3q7X4AAkJwH.jpg:large"],
     tags: ["girl", "sexy"],
     love: 45,
-    comment: 2,
+    comment: 1,
     loved: false,
     commentContent: [
       {
@@ -44,7 +44,7 @@ const initState = [
     images: ["https://pbs.twimg.com/media/Drtt3q7X4AAkJwH.jpg:large"],
     tags: ["girl", "sexy"],
     love: 8,
-    comment: 4,
+    comment: 1,
     loved: false,
     commentContent: [
       {
@@ -62,7 +62,7 @@ const initState = [
     images: ["https://pbs.twimg.com/media/Drtt3q7X4AAkJwH.jpg:large"],
     tags: ["girl", "sexy"],
     love: 32,
-    comment: 4,
+    comment: 1,
     loved: false,
     commentContent: [
       {
@@ -80,7 +80,7 @@ const initState = [
     images: ["https://pbs.twimg.com/media/Drtt3q7X4AAkJwH.jpg:large"],
     tags: ["girl", "sexy"],
     love: 1,
-    comment: 12,
+    comment: 1,
     loved: false,
     commentContent: [
       {
@@ -98,7 +98,7 @@ const initState = [
     images: ["https://pbs.twimg.com/media/Drtt3q7X4AAkJwH.jpg:large"],
     tags: ["girl", "sexy"],
     love: 4,
-    comment: 7,
+    comment: 1,
     loved: false,
     commentContent: [
       {
@@ -116,7 +116,7 @@ const initState = [
     images: ["https://pbs.twimg.com/media/Drtt3q7X4AAkJwH.jpg:large"],
     tags: ["girl", "sexy"],
     love: 65,
-    comment: 8,
+    comment: 1,
     loved: false,
     commentContent: [
       {

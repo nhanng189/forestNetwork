@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { toggleLove } from '../../../actions'
+import { toggleLove, addComment } from '../../../actions'
 
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -20,6 +20,32 @@ import Comment from '../../../icons/comment.png';
 import '../../../Style/TimelinePost.css';
 
 class Post extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      comment: ""
+    }
+  }
+
+  onSubmit = (event) => {
+    event.preventDefault();
+    this.props.addComment(this.props.id, "Fumika", this.state.comment)
+    this.setState({
+      comment: ""
+    })
+  }
+
+  onChange = (event) => {
+    var target = event.target;
+    var value = target.value;
+    var name = target.name;
+
+    this.setState({
+      [name]: value
+    })
+  }
+
   render() {
     return (
       <Card className="tlp-card" >
@@ -75,7 +101,10 @@ class Post extends Component {
         </CardActions>
         <div style={{ padding: "0 15px 0 15px" }}><hr /></div>
         <CardActions disableActionSpacing className="tlp-card-action-comment">
-          <InputBase style={{ fontSize: "15px" }} fullWidth placeholder="Add your comment ..."></InputBase>
+          <form style={{ width: "100%" }} onSubmit={this.onSubmit}>
+            <InputBase style={{ fontSize: "15px" }} fullWidth placeholder="Add your comment ..."
+              name="comment" value={this.state.comment} type="text" onChange={this.onChange} />
+          </form>
         </CardActions>
       </Card>
     );
@@ -83,7 +112,8 @@ class Post extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  toggleLove: id => dispatch(toggleLove(id))
+  toggleLove: id => dispatch(toggleLove(id)),
+  addComment: (id, user, comment) => dispatch(addComment(id, user, comment))
 })
 
 export default connect(
