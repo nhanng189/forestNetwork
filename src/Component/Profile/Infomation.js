@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { getProfileData } from '../../actions/profileAction';
 
 import Card from '@material-ui/core/Card';
 import List from '@material-ui/core/List';
@@ -13,6 +14,14 @@ import MoodIcon from '@material-ui/icons/Mood';
 import WorkIcon from '@material-ui/icons/Work';
 
 class Information extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  componentWillMount() {
+    this.props.getProfileData();
+  }
+
   render() {
     return (
       <div>
@@ -24,7 +33,7 @@ class Information extends React.Component {
               </ListItemIcon>
               <ListItemText>
                 <div className="tlp-title">
-                  Nickname: &nbsp;
+                  Public key: &nbsp;
                   {this.props.myProfile.nickname}
                 </div>
               </ListItemText>
@@ -84,7 +93,13 @@ const mapStateToProps = state => ({
   myProfile: state.myProfile
 })
 
+const mapDispatchToProps = dispatch => {
+  return ({
+    getProfileData: () => dispatch(getProfileData('GAO4J5RXQHUVVONBDQZSRTBC42E3EIK66WZA5ZSGKMFCS6UNYMZSIDBI'))
+  })
+}
+
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(Information)
