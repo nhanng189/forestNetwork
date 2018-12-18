@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getProfileData } from '../../actions/profileAction';
 
 import Navibar from '../Navibar';
 import Headers from './Header';
@@ -8,6 +10,11 @@ import Information from './Infomation';
 import Grid from '@material-ui/core/Grid';
 
 class Profile extends Component {
+
+  componentWillMount = async () => {
+    await this.props.getProfileData(this.props.match.params.publicKey);
+  }
+
   render() {
     return (
       <div>
@@ -16,7 +23,7 @@ class Profile extends Component {
         <Grid container spacing={32}>
           <Grid item xs={1} />
           <Grid item xs={3}>
-            <Information />
+            <Information publicKey={this.props.match.params.publicKey} />
           </Grid>
           <Grid item xs={6}>
             <Posts />
@@ -28,4 +35,14 @@ class Profile extends Component {
   }
 }
 
-export default Profile;
+const mapDispatchToProps = dispatch => {
+  return ({
+    getProfileData: (publicKey) => dispatch(getProfileData(publicKey))
+  })
+}
+
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Profile)

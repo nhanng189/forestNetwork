@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import jpeg from 'jpeg-js';
 
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -52,13 +53,22 @@ class Header extends Component {
   };
 
   render() {
+    const profileData = Object.assign({}, this.props.myProfile.profileData);
+    const updateName = Object.assign({}, profileData.update_name);
+    const nameObj = Object.assign({}, Object.values(updateName)[0]);
+    const name = nameObj.name;
+
+    const updatePicture = Object.assign({}, profileData.update_picture);
+    const pictureObj = Object.assign({}, Object.values(updatePicture)[0]);
+    const imageStr = `data:image/png;base64,${pictureObj.picture_base64}`;
+
     return (
       <div>
         <Card style={{ marginTop: "90px", height: "320px" }}>
           <div style={{ zIndex: "1000", position: "absolute", marginLeft: "184px", marginTop: "150px" }}>
-            <Avatar style={{ border: "5px white solid", float: "left", width: "200px", height: "200px" }} alt="" src={this.props.myProfile.avatar} />
+            <Avatar style={{ border: "5px white solid", float: "left", width: "200px", height: "200px" }} alt="" src={imageStr} />
             <div style={{ float: "left", fontSize: "35px", fontWeight: "bolder", marginLeft: "50px", marginTop: "25px" }}>
-              {this.props.myProfile.name}
+              {name}
               &nbsp;
               <IconButton onClick={this.handleEditOpen} style={{ marginBottom: "5px" }}>
                 <EditIcon />

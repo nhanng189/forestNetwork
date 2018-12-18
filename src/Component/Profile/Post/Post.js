@@ -53,6 +53,7 @@ class Post extends Component {
           className="tlp-card-header"
           avatar={
             <Avatar src={this.props.avatar} className="tlp-avatar">
+              <Avatar src='' className="tlp-avatar"></Avatar>
             </Avatar>
           }
           action={
@@ -62,24 +63,24 @@ class Post extends Component {
           }
           title={
             <div>
-              <div className="tlp-username">{this.props.user}</div>
+              <div className="tlp-username">Username</div>
               <div className="tlp-time">{this.props.time}</div>
             </div>
           }
         />
         <CardContent className="tlp-card-content">
           <div className="tlp-title">
-            {this.props.title}
+            {this.props.content}
           </div>
         </CardContent>
         <CardMedia
           component={Link} to={`/post/${this.props.id}`}
           className="tlp-card-media"
-          image={this.props.images[0]}
+          image='https://www.w3schools.com/w3css/img_lights.jpg'
         >
         </CardMedia>
         <CardActions disableActionSpacing className="tlp-card-action">
-          <div className="tlp-action-field">
+          {/* <div className="tlp-action-field">
             <IconButton disableRipple="true" disableTouchRipple="true" className="tlp-action-icon" onClick={() => this.props.toggleLove(this.props.id)}>
               <img className="tlp-action-icon-img" alt="" src={this.props.loved ? Love4 : Love3} />
             </IconButton>
@@ -97,7 +98,7 @@ class Post extends Component {
               <img className="tlp-action-icon-img" alt="" src={Comment} />
             </IconButton>
             {`Comment ${this.props.comment}`}
-          </div>
+          </div> */}
         </CardActions>
         <div style={{ padding: "0 15px 0 15px" }}><hr /></div>
         <CardActions disableActionSpacing className="tlp-card-action-comment">

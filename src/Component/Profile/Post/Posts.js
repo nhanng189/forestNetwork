@@ -6,13 +6,14 @@ import '../../../Style/TimelinePost.css';
 
 class Posts extends Component {
   render() {
-    let elements = this.props.myPosts.map((post) => {
+    const profileData = Object.assign({}, this.props.myProfile.profileData);
+    const post = Object.assign({}, profileData.post);
+    const posts = Object.values(post)
+
+    let elements = posts.map((post) => {
       return <Post
-        id={post.id}
-        avatar={post.avatar} user={post.user}
-        time={post.time} title={post.title}
-        images={post.images} love={post.love}
-        comment={post.comment} loved={post.loved}
+        content={post.content}
+        time={post.time}
       />
     })
     return (
@@ -24,7 +25,7 @@ class Posts extends Component {
 }
 
 const mapStateToProps = state => ({
-  myPosts: state.myPosts
+  myProfile: state.myProfile
 })
 
 export default connect(

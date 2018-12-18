@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { connect } from 'react-redux';
 import { getProfileData } from '../../actions/profileAction';
+import _ from 'lodash'
 
 import Card from '@material-ui/core/Card';
 import List from '@material-ui/core/List';
@@ -14,15 +15,13 @@ import MoodIcon from '@material-ui/icons/Mood';
 import WorkIcon from '@material-ui/icons/Work';
 
 class Information extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  componentWillMount() {
-    this.props.getProfileData();
-  }
-
   render() {
+    const profileData = Object.assign({}, this.props.myProfile.profileData);
+    const createdBy = profileData.created_by;
+    const createdAt = profileData.created_at;
+    const budget = "";
+    const energy = "";
+
     return (
       <div>
         <Card style={{ marginTop: "50px" }}>
@@ -33,8 +32,8 @@ class Information extends React.Component {
               </ListItemIcon>
               <ListItemText>
                 <div className="tlp-title">
-                  Public key: &nbsp;
-                  {this.props.myProfile.nickname}
+                  Created by: &nbsp;
+                  {createdBy}
                 </div>
               </ListItemText>
             </ListItem>
@@ -44,8 +43,8 @@ class Information extends React.Component {
               </ListItemIcon>
               <ListItemText>
                 <div className="tlp-title">
-                  Birthday: &nbsp;
-                  {this.props.myProfile.birthday}
+                  Join: &nbsp;
+                  {createdAt}
                 </div>
               </ListItemText>
             </ListItem>
@@ -55,8 +54,8 @@ class Information extends React.Component {
               </ListItemIcon>
               <ListItemText>
                 <div className="tlp-title">
-                  Current job: &nbsp;
-                  {this.props.myProfile.job}
+                  Budget: &nbsp;
+                  {budget}
                 </div>
               </ListItemText>
             </ListItem>
@@ -66,19 +65,8 @@ class Information extends React.Component {
               </ListItemIcon>
               <ListItemText>
                 <div className="tlp-title">
-                  Living in: &nbsp;
-                  {this.props.myProfile.address}
-                </div>
-              </ListItemText>
-            </ListItem>
-            <ListItem>
-              <ListItemIcon>
-                <HomeIcon />
-              </ListItemIcon>
-              <ListItemText>
-                <div className="tlp-title">
-                  Hometown: &nbsp;
-                  {this.props.myProfile.hometown}
+                  Energy: &nbsp;
+                  {energy}
                 </div>
               </ListItemText>
             </ListItem>
@@ -93,13 +81,7 @@ const mapStateToProps = state => ({
   myProfile: state.myProfile
 })
 
-const mapDispatchToProps = dispatch => {
-  return ({
-    getProfileData: () => dispatch(getProfileData('GAO4J5RXQHUVVONBDQZSRTBC42E3EIK66WZA5ZSGKMFCS6UNYMZSIDBI'))
-  })
-}
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  null
 )(Information)
