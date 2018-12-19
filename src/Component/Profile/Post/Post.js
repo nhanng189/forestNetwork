@@ -73,18 +73,18 @@ class Post extends Component {
             {this.props.content}
           </div>
         </CardContent>
-        <CardMedia
+        {/* <CardMedia
           component={Link} to={`/post/${this.props.id}`}
           className="tlp-card-media"
           image='https://www.w3schools.com/w3css/img_lights.jpg'
         >
-        </CardMedia>
+        </CardMedia> */}
         <CardActions disableActionSpacing className="tlp-card-action">
-          {/* <div className="tlp-action-field">
+          <div className="tlp-action-field">
             <IconButton disableRipple="true" disableTouchRipple="true" className="tlp-action-icon" onClick={() => this.props.toggleLove(this.props.id)}>
-              <img className="tlp-action-icon-img" alt="" src={this.props.loved ? Love4 : Love3} />
+              <img className="tlp-action-icon-img" alt="" src={Love3} />
             </IconButton>
-            {this.props.loved ? `Loved ${this.props.love}` : `Love ${this.props.love}`}
+            {/* {this.props.loved ? `Loved ${this.props.love}` : `Love ${this.props.love}`} */}
           </div>
           <div className="tlp-action-field">
             <IconButton disableRipple="true" disableTouchRipple="true" className="tlp-action-icon" >
@@ -97,8 +97,8 @@ class Post extends Component {
             <IconButton disableRipple="true" disableTouchRipple="true" className="tlp-action-icon">
               <img className="tlp-action-icon-img" alt="" src={Comment} />
             </IconButton>
-            {`Comment ${this.props.comment}`}
-          </div> */}
+            {/* {`Comment ${this.props.comment}`} */}
+          </div>
         </CardActions>
         <div style={{ padding: "0 15px 0 15px" }}><hr /></div>
         <CardActions disableActionSpacing className="tlp-card-action-comment">

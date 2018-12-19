@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { getProfileData } from '../../actions/profileAction';
 import _ from 'lodash'
 
@@ -33,7 +34,7 @@ class Information extends React.Component {
               <ListItemText>
                 <div className="tlp-title">
                   Created by: &nbsp;
-                  {createdBy}
+                  <a href={'/account/' + createdBy}>See profile</a>
                 </div>
               </ListItemText>
             </ListItem>
@@ -81,7 +82,13 @@ const mapStateToProps = state => ({
   myProfile: state.myProfile
 })
 
+const mapDispatchToProps = dispatch => {
+  return ({
+    getProfileData: (publicKey) => dispatch(getProfileData(publicKey))
+  })
+}
+
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(Information)

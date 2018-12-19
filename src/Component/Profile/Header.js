@@ -52,6 +52,10 @@ class Header extends Component {
     });
   };
 
+  setScreen = (screen) => {
+    this.props.setScreen(screen)
+  }
+
   render() {
     const profileData = Object.assign({}, this.props.myProfile.profileData);
     const updateName = Object.assign({}, profileData.update_name);
@@ -81,11 +85,18 @@ class Header extends Component {
           </CardMedia>
           <CardActions >
             <div style={{ zIndex: "1001", marginLeft: "420px" }}>
-              <Button style={{ fontSize: "11px", width: "100px" }}>
+              <Button style={{ fontSize: "11px", width: "100px" }} onClick={() => this.setScreen('0')}>
                 <div>
                   Post
                   <br />
                   {this.props.myPosts.length}
+                </div>
+              </Button>
+              <Button style={{ fontSize: "11px", width: "100px" }} onClick={() => this.setScreen('1')}>
+                <div>
+                  Exchange
+                  <br />
+                  {this.props.myFollowers.length}
                 </div>
               </Button>
               <Button style={{ fontSize: "11px", width: "100px" }} onClick={this.handleFollowersOpen}>
