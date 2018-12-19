@@ -40,13 +40,13 @@ class Profile extends Component {
         <Headers setScreen={this.setScreen} />
         <Grid container spacing={32}>
           <Grid item xs={1} />
-          <Grid item xs={4}>
+          <Grid item xs={3}>
             <Information publicKey={this.props.match.params.publicKey} />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={7}>
             {element}
           </Grid>
-          <Grid item xs={1} />
+          <Grid item xs={2} />
         </Grid>
       </div>
     );

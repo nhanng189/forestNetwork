@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { toggleLove, addComment } from '../../../actions'
+import moment from 'moment';
 
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -22,7 +23,7 @@ class Post extends Component {
         <CardHeader
           className="tlp-card-header"
           avatar={
-            <Avatar src={this.props.avatar} className="tlp-avatar">
+            <Avatar src={this.props.imageStr} className="tlp-avatar">
               <Avatar src='' className="tlp-avatar"></Avatar>
             </Avatar>
           }
@@ -33,14 +34,16 @@ class Post extends Component {
           }
           title={
             <div>
-              <div className="tlp-username">Username</div>
-              <div className="tlp-time">{this.props.time}</div>
+              <div className="tlp-username">{this.props.name}</div>
+              <div className="tlp-time">{moment(this.props.time).format('MMMM Do YYYY, h:mm:ss a')}</div>
             </div>
           }
         />
         <CardContent className="tlp-card-content">
           <div className="tlp-title">
-            Receive {this.props.amount} from {this.props.from}
+            {this.props.from
+              ? `Receive ${this.props.amount} from ${this.props.from}`
+              : `Send ${this.props.amount} to ${this.props.to}`}
           </div>
         </CardContent>
       </Card>

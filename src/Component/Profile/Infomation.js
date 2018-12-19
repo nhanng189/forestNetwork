@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getProfileData } from '../../actions/profileAction';
 import _ from 'lodash'
+import moment from 'moment';
 
 import Card from '@material-ui/core/Card';
 import List from '@material-ui/core/List';
@@ -45,7 +46,7 @@ class Information extends React.Component {
               <ListItemText>
                 <div className="tlp-title">
                   Join: &nbsp;
-                  {createdAt}
+                  {moment(createdAt).format('MMMM Do YYYY')}
                 </div>
               </ListItemText>
             </ListItem>

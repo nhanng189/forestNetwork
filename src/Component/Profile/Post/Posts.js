@@ -10,8 +10,18 @@ class Posts extends Component {
     const post = Object.assign({}, profileData.post);
     const posts = Object.values(post)
 
+    const updateName = Object.assign({}, profileData.update_name);
+    const nameObj = Object.assign({}, Object.values(updateName)[0]);
+    const name = nameObj.name;
+
+    const updatePicture = Object.assign({}, profileData.update_picture);
+    const pictureObj = Object.assign({}, Object.values(updatePicture)[0]);
+    const imageStr = `data:image/png;base64,${pictureObj.picture_base64}`;
+
     let elements = posts.map((post) => {
       return <Post
+        name={name}
+        imageStr={imageStr}
         content={post.content}
         time={post.time}
       />
