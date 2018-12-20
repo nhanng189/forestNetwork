@@ -19,10 +19,11 @@ import WorkIcon from '@material-ui/icons/Work';
 class Information extends React.Component {
   render() {
     const profileData = Object.assign({}, this.props.myProfile.profileData);
-    const createdBy = profileData.created_by;
-    const createdAt = profileData.created_at;
-    const budget = "";
-    const energy = "";
+    const info = Object.assign({}, profileData.info);
+    const createdBy = info.created_by;
+    const createdAt = info.created_at;
+    const sequence = info.sequence;
+    const energy = info.energy;
 
     return (
       <div>
@@ -56,8 +57,8 @@ class Information extends React.Component {
               </ListItemIcon>
               <ListItemText>
                 <div className="tlp-title">
-                  Budget: &nbsp;
-                  {budget}
+                  Sequence: &nbsp;
+                  {sequence}
                 </div>
               </ListItemText>
             </ListItem>

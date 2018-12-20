@@ -58,13 +58,9 @@ class Header extends Component {
 
   render() {
     const profileData = Object.assign({}, this.props.myProfile.profileData);
-    const updateName = Object.assign({}, profileData.update_name);
-    const nameObj = Object.assign({}, Object.values(updateName)[0]);
-    const name = nameObj.name;
-
-    const updatePicture = Object.assign({}, profileData.update_picture);
-    const pictureObj = Object.assign({}, Object.values(updatePicture)[0]);
-    const imageStr = `data:image/png;base64,${pictureObj.picture_base64}`;
+    const info = Object.assign({}, profileData.info);
+    const name = info.name;
+    const imageStr = `data:image/png;base64,${info.picture}`;
 
     return (
       <div>
