@@ -1,4 +1,4 @@
-const myProfile = (state = { profileData: null }, action) => {
+const myProfile = (state = {profileData: null}, action) => {
   switch (action.type) {
     case 'SET_PROFILE_DATA':
       return {
@@ -18,8 +18,8 @@ const myProfile = (state = { profileData: null }, action) => {
       }
 
     default:
-      return state
+      return state;
   }
 }
 
-export default myProfile
+export default myProfile;

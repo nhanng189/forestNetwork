@@ -18,13 +18,14 @@
 }
 
 .card {
-    width: 25em;
+    width: 50em;
     height: 25em;
     margin-top: 3em;
+    text-align: center;
 }
 
 .card-content {
-    padding: 10%;
+    padding: 5%;
 }
 
 .text {

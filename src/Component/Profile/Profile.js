@@ -41,7 +41,7 @@ class Profile extends Component {
         <Grid container spacing={32}>
           <Grid item xs={1} />
           <Grid item xs={3}>
-            <Information publicKey={this.props.match.params.publicKey} />
+            <Information />
           </Grid>
           <Grid item xs={7}>
             {element}

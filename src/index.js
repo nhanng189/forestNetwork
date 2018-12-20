@@ -13,6 +13,10 @@ const middleware = [thunk];
 // middleware.push(createLogger());
 const store = createStore(rootReducer, applyMiddleware(...middleware));
 
+store.subscribe(function() {
+    console.log(store.getState());
+})
+
 ReactDOM.render(
     <Provider store={store}>
         <App />

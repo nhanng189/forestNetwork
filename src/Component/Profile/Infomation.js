@@ -1,8 +1,5 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { getProfileData } from '../../actions/profileAction';
-import _ from 'lodash'
 import moment from 'moment';
 
 import Card from '@material-ui/core/Card';
@@ -11,15 +8,15 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import CakeIcon from '@material-ui/icons/Cake';
-import HomeIcon from '@material-ui/icons/Home';
-import PlaceIcon from '@material-ui/icons/Place';
-import MoodIcon from '@material-ui/icons/Mood';
+import BatteryIcon from '@material-ui/icons/BatteryFull';
+import AddIcon from '@material-ui/icons/AddCircle';
 import WorkIcon from '@material-ui/icons/Work';
 
 class Information extends React.Component {
   render() {
     const profileData = Object.assign({}, this.props.myProfile.profileData);
     const info = Object.assign({}, profileData.info);
+
     const createdBy = info.created_by;
     const createdAt = info.created_at;
     const sequence = info.sequence;
@@ -31,12 +28,12 @@ class Information extends React.Component {
           <List>
             <ListItem>
               <ListItemIcon>
-                <MoodIcon />
+                <AddIcon />
               </ListItemIcon>
               <ListItemText>
                 <div className="tlp-title">
-                  Created by: &nbsp;
-                  <a href={'/account/' + createdBy}>See profile</a>
+                  <span style={{fontWeight: 'bold'}}>Created by: </span>
+                  <a href={'/account/' + createdBy}>View detail</a>
                 </div>
               </ListItemText>
             </ListItem>
@@ -46,7 +43,7 @@ class Information extends React.Component {
               </ListItemIcon>
               <ListItemText>
                 <div className="tlp-title">
-                  Join: &nbsp;
+                  <span style={{fontWeight: 'bold'}}>Join: </span>
                   {moment(createdAt).format('MMMM Do YYYY')}
                 </div>
               </ListItemText>
@@ -57,18 +54,18 @@ class Information extends React.Component {
               </ListItemIcon>
               <ListItemText>
                 <div className="tlp-title">
-                  Sequence: &nbsp;
+                  <span style={{fontWeight: 'bold'}}>Sequence: </span>
                   {sequence}
                 </div>
               </ListItemText>
             </ListItem>
             <ListItem>
               <ListItemIcon>
-                <PlaceIcon />
+                <BatteryIcon />
               </ListItemIcon>
               <ListItemText>
                 <div className="tlp-title">
-                  Energy: &nbsp;
+                  <span style={{fontWeight: 'bold'}}>Energy: </span>
                   {energy}
                 </div>
               </ListItemText>
@@ -80,17 +77,11 @@ class Information extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   myProfile: state.myProfile
-})
-
-const mapDispatchToProps = dispatch => {
-  return ({
-    getProfileData: (publicKey) => dispatch(getProfileData(publicKey))
-  })
-}
+});
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
-)(Information)
+  null
+)(Information);

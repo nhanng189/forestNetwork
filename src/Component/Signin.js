@@ -13,7 +13,7 @@ class Signin extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      publicKey: null
+      publicKey: ''
     }
   }
 
@@ -34,14 +34,14 @@ class Signin extends Component {
   render() {
     return (
       <div className="signin-container background">
-        <div className="signin-app-title">Mạng trong rừng</div>
+        <div className="signin-app-title">MẠNG TRONG RỪNG</div>
         <Grid container justify="center" alignItems="center">
           <Card className="card">
             <div className="card-content">
-              <h4 style={{ textAlign: "center", marginTop: "20px" }}>Đăng nhập đi má</h4>
+              <h4 style={{ textAlign: "center", fontWeight: "bold"}}>Chào mừng đến với mạng rừng!</h4>
               <form onSubmit={this.onSubmit} noValidate autoComplete="off">
                 <TextField
-                  style={{ marginTop: "35px", marginBottom: "35px" }}
+                  style={{ marginTop: "35px", marginBottom: "35px"}}
                   name="publicKey"
                   label="Public key"
                   value={this.state.publicKey}

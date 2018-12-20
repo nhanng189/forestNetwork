@@ -31,31 +31,21 @@ class Navibar extends Component {
               <TextField
                 className="search"
                 variant="outlined"
-                placeholder="Search for users or tags"
+                placeholder="Enter user's public key ..."
                 InputProps={{
                   startAdornment: <InputAdornment position="start"><SearchIcon /></InputAdornment>,
                 }}
               />
               <div className="flexgrow" />
-              <Button component={Link} to="/" className="page-button" color="inherit">HOME</Button>
-              <Button className="page-button" color="inherit">EXPLORE</Button>
-              <Button className="page-button" color="inherit">PROFILE</Button>
-              <Button className="page-button" disabled color="inherit">|</Button>
-              <IconButton color="inherit">
-                <Badge invisible="false" badgeContent={4} color="secondary">
-                  <MailIcon />
-                </Badge>
-              </IconButton>
-              <IconButton color="inherit">
-                <Badge badgeContent={5} color="primary">
-                  <NotificationsIcon />
-                </Badge>
-              </IconButton>
-              <Button className="page-button" disabled color="inherit">|</Button>
-              <Avatar src="https://pbs.twimg.com/profile_images/733142049864585216/IzFb9HCz_400x400.jpg"></Avatar>
+              <Button component={Link} to="/" className="page-button" color="inherit">EXPLORE</Button>
+              <Button className="page-button" color="inherit">HOME</Button>
+              <Button className="page-button" color="inherit">PAYMENT</Button>
+              <Button className="page-button" color="inherit">CREATE ACCOUNT</Button>
               <Button style={{ height: "35px", backgroundColor: "#a000a5", fontSize: "11px", color: "white", padding: "2px 10px 2px 7px", marginLeft: "25px" }} variant="contained" onClick={this.selectedPickImage}>
                 <AddIcon />New post
               </Button>
+              <Button className="page-button" disabled color="inherit">|</Button>
+              <Button className="page-button" color="inherit">LOGOUT</Button>
             </Toolbar>
           </Grid>
           <Grid item xs={1} />

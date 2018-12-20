@@ -9,6 +9,7 @@ import { CardActions } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import EditIcon from '@material-ui/icons/Create';
+import PhotoIcon from '@material-ui/icons/InsertPhoto';
 
 import FollowingDialog from '../Following';
 import FollowersDialog from '../Followers';
@@ -38,7 +39,6 @@ class Header extends Component {
   }
 
   handleEditOpen = () => {
-    console.log('edit')
     this.setState({
       editOpen: true
     })
@@ -59,12 +59,12 @@ class Header extends Component {
   render() {
     const profileData = Object.assign({}, this.props.myProfile.profileData);
     const info = Object.assign({}, profileData.info);
-    const name = info.name;
+    const name = info.name ? info.name : 'Unnamed';
     const imageStr = `data:image/png;base64,${info.picture}`;
 
     return (
       <div>
-        <Card style={{ marginTop: "90px", height: "320px" }}>
+        <Card style={{ marginTop: "90px", height: "320px", backgroundImage: "url(http://mkkr.biz/wp-content/uploads/css3-background-patterns-css-light-live-background-people.jpg)"}}>
           <div style={{ zIndex: "1000", position: "absolute", marginLeft: "184px", marginTop: "150px" }}>
             <Avatar style={{ border: "5px white solid", float: "left", width: "200px", height: "200px" }} alt="" src={imageStr} />
             <div style={{ float: "left", fontSize: "35px", fontWeight: "bolder", marginLeft: "50px", marginTop: "25px" }}>
@@ -73,11 +73,13 @@ class Header extends Component {
               <IconButton onClick={this.handleEditOpen} style={{ marginBottom: "5px" }}>
                 <EditIcon />
               </IconButton>
+              <IconButton onClick={this.handleEditOpen} style={{ marginBottom: "5px" }}>
+                <PhotoIcon />
+              </IconButton>
             </div>
           </div>
           <CardMedia style={{ height: "250px" }}
-            image={this.props.myProfile.wallpaper}
-          >
+            image={this.props.myProfile.wallpaper}>
           </CardMedia>
           <CardActions >
             <div style={{ zIndex: "1001", marginLeft: "420px" }}>

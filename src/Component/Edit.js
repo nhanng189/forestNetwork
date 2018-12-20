@@ -14,27 +14,13 @@ class EditDialog extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      avatar: "",
-      wallpaper: "",
-      nickname: "",
-      job: "",
-      hometown: "",
-      address: "",
-      birthday: ""
+      name: ""
     }
   }
 
   componentWillMount() {
     this.setState({
       name: this.props.myProfile.name,
-      avatar: this.props.myProfile.avatar,
-      wallpaper: this.props.myProfile.wallpaper,
-      nickname: this.props.myProfile.nickname,
-      job: this.props.myProfile.job,
-      hometown: this.props.myProfile.hometown,
-      address: this.props.myProfile.address,
-      birthday: this.props.myProfile.birthday
     })
   }
 
@@ -53,8 +39,8 @@ class EditDialog extends React.Component {
   };
 
   onEdit = () => {
-    const { name, avatar, wallpaper, nickname, job, hometown, address, birthday } = this.state;
-    this.props.editProfile(name, avatar, wallpaper, nickname, job, hometown, address, birthday);
+    const { name } = this.state;
+    this.props.editProfile(name);
     this.handleClose();
   }
 
@@ -74,121 +60,7 @@ class EditDialog extends React.Component {
                   label="Name"
                   value={this.state.name}
                   onChange={this.onChange}
-                  margin="normal"
-                  helperText="Some important text"
-                />
-              </form>
-            </ListItemText>
-          </ListItem>
-          <ListItem style={{ paddingBottom: "0", paddingTop: "0" }}>
-            <ListItemText>
-              <form noValidate autoComplete="off">
-                <TextField
-                  style={{ width: "300px" }}
-                  variant="outlined"
-                  name="avatar"
-                  label="Avatar"
-                  value={this.state.avatar}
-                  onChange={this.onChange}
-                  margin="normal"
-                  helperText="Some important text"
-                />
-              </form>
-            </ListItemText>
-          </ListItem>
-          <ListItem style={{ paddingBottom: "0", paddingTop: "0" }}>
-            <ListItemText>
-              <form noValidate autoComplete="off">
-                <TextField
-                  style={{ width: "300px" }}
-                  variant="outlined"
-                  name="wallpaper"
-                  label="Wallpaper"
-                  value={this.state.wallpaper}
-                  onChange={this.onChange}
-                  margin="normal"
-                  helperText="Some important text"
-                />
-              </form>
-            </ListItemText>
-          </ListItem>
-          <ListItem style={{ paddingBottom: "0", paddingTop: "0" }}>
-            <ListItemText>
-              <form noValidate autoComplete="off">
-                <TextField
-                  style={{ width: "300px" }}
-                  variant="outlined"
-                  name="nickname"
-                  label="Nickname"
-                  value={this.state.nickname}
-                  onChange={this.onChange}
-                  margin="normal"
-                  helperText="Some important text"
-                />
-              </form>
-            </ListItemText>
-          </ListItem>
-          <ListItem style={{ paddingBottom: "0", paddingTop: "0" }}>
-            <ListItemText>
-              <form noValidate autoComplete="off">
-                <TextField
-                  style={{ width: "300px" }}
-                  variant="outlined"
-                  name="job"
-                  label="Job"
-                  value={this.state.job}
-                  onChange={this.onChange}
-                  margin="normal"
-                  helperText="Some important text"
-                />
-              </form>
-            </ListItemText>
-          </ListItem>
-          <ListItem style={{ paddingBottom: "0", paddingTop: "0" }}>
-            <ListItemText>
-              <form noValidate autoComplete="off">
-                <TextField
-                  style={{ width: "300px" }}
-                  variant="outlined"
-                  name="hometown"
-                  label="Hometown"
-                  value={this.state.hometown}
-                  onChange={this.onChange}
-                  margin="normal"
-                  helperText="Some important text"
-                />
-              </form>
-            </ListItemText>
-          </ListItem>
-          <ListItem style={{ paddingBottom: "0", paddingTop: "0" }}>
-            <ListItemText>
-              <form noValidate autoComplete="off">
-                <TextField
-                  style={{ width: "300px" }}
-                  variant="outlined"
-                  name="address"
-                  label="Address"
-                  value={this.state.address}
-                  onChange={this.onChange}
-                  margin="normal"
-                  helperText="Some important text"
-                />
-              </form>
-            </ListItemText>
-          </ListItem>
-          <ListItem style={{ paddingBottom: "0", paddingTop: "0" }}>
-            <ListItemText>
-              <form noValidate autoComplete="off">
-                <TextField
-                  style={{ width: "300px" }}
-                  variant="outlined"
-                  name="birthday"
-                  label="Birthday"
-                  value={this.state.birthday}
-                  onChange={this.onChange}
-                  margin="normal"
-                  helperText="Some important text"
-                />
+                  margin="normal" />
               </form>
             </ListItemText>
           </ListItem>
@@ -211,7 +83,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  editProfile: (name, avatar, wallpaper, nickname, job, hometown, address, birthday) => dispatch(editProfile(name, avatar, wallpaper, nickname, job, hometown, address, birthday))
+  editProfile: (name) => dispatch(editProfile(name))
 })
 
 export default connect(

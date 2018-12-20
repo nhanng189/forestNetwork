@@ -57,14 +57,13 @@ class Post extends Component {
               <Avatar src='' className="tlp-avatar"></Avatar>
             </Avatar>
           }
-          action={
-            <IconButton>
-              <MoreVertIcon />
-            </IconButton>
-          }
           title={
             <div>
-              <div className="tlp-username">{this.props.name}</div>
+              <div className="tlp-username">
+                <Link to={this.props.public_key}>
+                  {this.props.name ? this.props.name : 'Unnamed'}
+                </Link>
+              </div>
               <div className="tlp-time">{moment(this.props.time).format('MMMM Do YYYY, h:mm:ss a')}</div>
             </div>
           }
@@ -86,12 +85,6 @@ class Post extends Component {
               <img className="tlp-action-icon-img" alt="" src={Love3} />
             </IconButton>
             {/* {this.props.loved ? `Loved ${this.props.love}` : `Love ${this.props.love}`} */}
-          </div>
-          <div className="tlp-action-field">
-            <IconButton disableRipple="true" disableTouchRipple="true" className="tlp-action-icon" >
-              <img className="tlp-action-icon-img" alt="" src={Share} />
-            </IconButton>
-            Share
           </div>
           <div style={{ flexGrow: "1" }} />
           <div className="tlp-action-field">

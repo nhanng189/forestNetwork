@@ -18,10 +18,10 @@ export const addComment = (id, user, comment) => {
   }
 }
 
-export const editProfile = (name, avatar, wallpaper, nickname, job, hometown, address, birthday) => {
+export const editProfile = (name) => {
   return {
     type: 'EDIT_PROFILE',
-    name, avatar, wallpaper, nickname, job, hometown, address, birthday
+    name
   }
 }
 

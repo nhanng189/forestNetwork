@@ -13,11 +13,13 @@ class Posts extends Component {
 
     const info = Object.assign({}, profileData.info);
     const name = info.name;
+    const public_key = info.public_key;
     const imageStr = `data:image/png;base64,${info.picture}`;
 
     let elements = posts.map((post) => {
       return <Post
         name={name}
+        public_key={public_key}
         imageStr={imageStr}
         content={post.content}
         time={post.time}
