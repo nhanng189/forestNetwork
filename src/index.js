@@ -11,6 +11,7 @@ import * as serviceWorker from './serviceWorker';
 
 const middleware = [thunk];
 // middleware.push(createLogger());
+
 const store = createStore(rootReducer, applyMiddleware(...middleware));
 
 store.subscribe(function() {
@@ -23,4 +24,5 @@ ReactDOM.render(
     </Provider>,
     document.getElementById('root')
 );
+
 serviceWorker.unregister();

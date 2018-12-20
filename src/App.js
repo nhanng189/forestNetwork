@@ -9,15 +9,16 @@ var hist = createBrowserHistory();
 
 class App extends Component {
   render() {
-    return (<div className="gra">
-      <Router history={hist}>
-        <Switch>
-          {indexRoutes.map((prop, key) => {
-            return <Route path={prop.path} key={key} component={prop.component} />
-          })}
-        </Switch>
-      </Router>
-    </div>
+    return (
+      <div className="gra">
+        <Router history={hist}>
+          <Switch>
+            {indexRoutes.map((prop, key) => {
+              return <Route path={prop.path} key={key} component={prop.component} />
+            })}
+          </Switch>
+        </Router>
+      </div>
     );
   }
 }
