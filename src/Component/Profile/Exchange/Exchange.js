@@ -16,7 +16,10 @@ class Post extends Component {
           className="tlp-card-header"
           title={
             <div>
-              <div className="tlp-username">{this.props.from ? 'Nhận tiền' : 'Gửi tiền'}</div>
+              <div className="tlp-username">{this.props.from 
+                                  ? <a href={`https://forest.network/transactions/${this.props.hash}`} target={`_blank`}>Nhận tiền</a> 
+                                  : <a href={`https://forest.network/transactions/${this.props.hash}`} target={`_blank`}>Chuyển tiền</a> }
+              </div>
               <div className="tlp-time">{moment(this.props.time).format('MMMM Do YYYY, h:mm:ss a')}</div>
             </div>
           }
@@ -24,8 +27,8 @@ class Post extends Component {
         <CardContent className="tlp-card-content">
           <div className="tlp-title">
             {this.props.from
-              ? `Nhận ${this.props.amount}`
-              : `Chuyển ${this.props.amount}`}
+              ? `+ ${this.props.amount} CEL`
+              : `- ${this.props.amount} CEL`}
           </div>
           {this.props.from
             ? <Link to={`/account/${this.props.from}`}>Xem người gửi</Link>
