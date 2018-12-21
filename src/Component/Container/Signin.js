@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import { Keypair } from 'stellar-base';
+import { encode_key } from '../../key';
 
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
@@ -17,7 +19,7 @@ class Signin extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      publicKey: ''
+      privateKey: ''
     }
   }
 
@@ -36,12 +38,23 @@ class Signin extends Component {
   }
 
   handleClick = () => {
-      axios.get(host + '/account/' + this.state.publicKey)
+      let publicKey;
+
+      try {
+          publicKey = Keypair.fromSecret(this.state.privateKey).publicKey();
+      } catch (err) {
+            alert('Wrong Private Key Format');
+            return;
+      }
+
+      axios.get(host + '/account/' + publicKey)
         .then((res) => {
             if(res.data.account_not_exists) {
                 alert('Account does not exist');
             } else {
+                let privateKey_en = encode_key(this.state.privateKey);
                 this.props.setProfileData(res.data);
+                sessionStorage.setItem('forest_network_account', privateKey_en);
                 this.props.history.push('/');
             }
         })
@@ -65,9 +78,9 @@ class Signin extends Component {
                     <form onSubmit={this.onSubmit} noValidate autoComplete="off">
                         <TextField
                         style={{ marginTop: "35px", marginBottom: "35px"}}
-                        name="publicKey"
-                        label="Public key"
-                        value={this.state.publicKey}
+                        name="privateKey"
+                        label="Private Key"
+                        value={this.state.privateKey}
                         onChange={this.onChange}
                         fullWidth
                         />

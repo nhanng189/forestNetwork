@@ -64,7 +64,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    logOut: () => dispatch(logOutAction())
+    logOut: () => {
+      dispatch(logOutAction());
+      sessionStorage.removeItem('forest_network_account');
+    }
   }
 }
 

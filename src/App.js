@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Router, Route, Switch } from 'react-router';
 import { connect } from 'react-redux';
 import { createBrowserHistory } from 'history';
-
 import Explorer from './Component/Container/Explorer';
 import Signin from './Component/Container/Signin';
 import Profile from './Component/Profile/Profile';
@@ -28,13 +27,13 @@ class App extends Component {
 }
 
 function NoMatch(props) {
-    return <h3 style={{textAlign: 'center', backgroundColor: 'none'}}>Error 404: Not Found</h3>;
+  return <h3 style={{ textAlign: 'center', backgroundColor: 'none' }}>Error 404: Not Found</h3>;
 }
 
 const mapStateToProps = (state) => {
-    return {
-        profileData: state.myProfile.profileData
-    }
+  return {
+    profileData: state.myProfile.profileData
+  }
 }
 
 export default connect(mapStateToProps, null)(App);
