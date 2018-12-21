@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Router, Route, Switch } from 'react-router';
+import { connect } from 'react-redux';
 import { createBrowserHistory } from 'history';
 
-import indexRoutes from './Routes/index';
+import Signin from './Component/Container/Signin';
+import Profile from './Component/Profile/Profile';
 import './App.css';
 
 var hist = createBrowserHistory();
@@ -13,9 +15,8 @@ class App extends Component {
       <div className="gra">
         <Router history={hist}>
           <Switch>
-            {indexRoutes.map((prop, key) => {
-              return <Route path={prop.path} key={key} component={prop.component} />
-            })}
+            <Route path="/login" component={Signin} />
+            <Route path="/account/:publicKey" component={Profile} />
           </Switch>
         </Router>
       </div>
@@ -23,4 +24,12 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+    return {
+        myProfile: state.myProfile
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    null)(App);

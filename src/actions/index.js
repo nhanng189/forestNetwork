@@ -28,13 +28,12 @@ export const editProfile = (name) => {
 export const getProfileData = (publicKey) => async (dispatch, getState) => {
   let res;
   try {
-    res = await axios.get('http://35.243.137.115:3000/account' + publicKey )
+    res = await axios.get('http://35.243.137.115:3000/account/' + publicKey )
   }
   catch(err) {
     return;
   }
-  console.log(res);
-  dispatch(setProfileData(res.data.data));
+  dispatch(setProfileData(res.data));
 }
 
 export const setProfileData = (profileData) => {

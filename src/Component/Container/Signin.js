@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import axios from 'axios';
 
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField'
 
-import '../Style/signin.css';
+import '../../Style/signin.css';
+import host from '../../Host';
+import { setProfileData } from '../../actions';
 
 class Signin extends Component {
 
@@ -31,6 +35,22 @@ class Signin extends Component {
     event.preventDefault();
   }
 
+  handleClick = () => {
+      axios.get(host + 'account/' + this.state.publicKey)
+        .then((res) => {
+            if(res.data.account_not_exists) {
+                // Handle this
+                console.log('Account does not exist')
+            } else {
+                this.props.history.push('/');
+                this.props.setProfileData(res.data);
+            }
+        })
+        .catch((err) => {
+
+        })
+  }
+
   render() {
     return (
       <div className="signin-container background">
@@ -49,7 +69,7 @@ class Signin extends Component {
                   fullWidth
                 />
               </form>
-              <Button component={Link} to={"/account/" + this.state.publicKey} size="large" variant="extendedFab" color="secondary">
+              <Button onClick={this.handleClick} size="large" variant="extendedFab" color="secondary">
                 <h6>Đăng nhập</h6>
               </Button>
             </div>
@@ -60,4 +80,13 @@ class Signin extends Component {
   }
 }
 
-export default (Signin);
+const mapDispatchToProps = (dispatch) => {
+    return ({
+        setProfileData: (data) => dispatch(setProfileData(data))
+    });
+}
+
+export default withRouter(connect(
+    null,
+    mapDispatchToProps
+)(Signin));

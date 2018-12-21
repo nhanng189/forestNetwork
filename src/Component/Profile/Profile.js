@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getProfileData } from '../../actions/profileAction';
+import { getProfileData } from '../../actions';
 
 import Navibar from '../Navibar';
 import Headers from './Header';
@@ -60,7 +61,7 @@ const mapDispatchToProps = dispatch => {
 }
 
 
-export default connect(
+export default withRouter(connect(
   null,
   mapDispatchToProps
-)(Profile)
+)(Profile));
