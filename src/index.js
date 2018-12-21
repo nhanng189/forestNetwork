@@ -14,8 +14,10 @@ const middleware = [thunk];
 
 const store = createStore(rootReducer, applyMiddleware(...middleware));
 
+console.log('Init State', store.getState());
+
 store.subscribe(function() {
-    console.log(store.getState());
+    console.log('State Changed', store.getState());
 })
 
 ReactDOM.render(

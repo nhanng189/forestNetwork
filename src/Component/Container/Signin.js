@@ -43,7 +43,7 @@ class Signin extends Component {
                 console.log('Account does not exist')
             } else {
                 this.props.setProfileData(res.data);
-                this.props.history.push('/');
+                this.props.history.push('/account/' + this.state.publicKey);
             }
         })
         .catch((err) => {

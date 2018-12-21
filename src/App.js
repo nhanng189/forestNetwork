@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Router, Route, Switch } from 'react-router';
+import { Router, Route, Switch, Redirect } from 'react-router';
 import { connect } from 'react-redux';
 import { createBrowserHistory } from 'history';
 
@@ -17,6 +17,8 @@ class App extends Component {
           <Switch>
             <Route path="/login" component={Signin} />
             <Route path="/account/:publicKey" component={Profile} />
+
+            {!this.props.myProfile.profileData && <Redirect to="/login" />}
           </Switch>
         </Router>
       </div>
