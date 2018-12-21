@@ -36,7 +36,7 @@ class Signin extends Component {
   }
 
   handleClick = () => {
-      axios.get(host + 'account/' + this.state.publicKey)
+      axios.get(host + '/account/' + this.state.publicKey)
         .then((res) => {
             if(res.data.account_not_exists) {
                 // Handle this
@@ -96,7 +96,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 }
 
-export default withRouter(connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Signin));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Signin));

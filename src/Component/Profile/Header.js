@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import jpeg from 'jpeg-js';
 
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -57,25 +56,22 @@ class Header extends Component {
   }
 
   render() {
-    const profileData = Object.assign({}, this.props.myProfile.profileData);
-    const info = Object.assign({}, profileData.info);
-    const name = info.name ? info.name : 'Unnamed';
-    const imageStr = `data:image/png;base64,${info.picture}`;
-
     return (
       <div>
         <Card style={{ marginTop: "90px", height: "320px", backgroundImage: "url(http://mkkr.biz/wp-content/uploads/css3-background-patterns-css-light-live-background-people.jpg)"}}>
           <div style={{ zIndex: "1000", position: "absolute", marginLeft: "184px", marginTop: "150px" }}>
-            <Avatar style={{ border: "5px white solid", float: "left", width: "200px", height: "200px" }} alt="" src={imageStr} />
+            <Avatar style={{ border: "5px white solid", float: "left", width: "200px", height: "200px" }} alt="" src={`data:image/png;base64,${this.props.accInfo.picture}`} />
             <div style={{ float: "left", fontSize: "35px", fontWeight: "bolder", marginLeft: "50px", marginTop: "25px" }}>
-              {name}
+              {this.props.accInfo.name}
               &nbsp;
+              {this.props.isMe && 
               <IconButton onClick={this.handleEditOpen} style={{ marginBottom: "5px" }}>
                 <EditIcon />
-              </IconButton>
+              </IconButton>}
+              {this.props.isMe && 
               <IconButton onClick={this.handleEditOpen} style={{ marginBottom: "5px" }}>
                 <PhotoIcon />
-              </IconButton>
+              </IconButton>}
             </div>
           </div>
           <CardMedia style={{ height: "250px" }}
@@ -126,7 +122,7 @@ class Header extends Component {
           open={this.state.editOpen}
           onClose={this.handleClose}
         />
-      </div >
+      </div>
     );
   }
 }

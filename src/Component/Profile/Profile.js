@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getProfileData } from '../../actions';
+import axios from 'axios';
+import host from '../../Host';
 
 import Navibar from '../Navibar';
 import Headers from './Header';
@@ -16,7 +18,9 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      screen: '0'
+      isMe: true,
+      screen: '0',
+      accData: {}
     }
   }
 
@@ -27,18 +31,54 @@ class Profile extends Component {
   }
 
   componentWillMount = async () => {
-    await this.props.getProfileData(this.props.match.params.publicKey);
+    if(!this.props.profileData) {
+      return <Redirect to="/login" />;
+    }
+
+    if(this.props.profileData.info.public_key === this.props.match.params.publicKey) {
+      this.setState({
+        accData: this.props.profileData,
+        isMe: true
+      });
+    } else {
+      let currentAcc = await axios.get(host + '/account/' + this.props.match.params.publicKey);
+      this.setState({
+        accData: currentAcc,
+        isMe: false
+      });
+    }
+  }
+
+  componentWillReceiveProps = async (nextProp) => {
+    if(this.props.match.params.publicKey !== nextProp.match.params.publicKey) {
+      if(this.props.profileData.info.public_key === nextProp.match.params.publicKey) {
+        this.setState({
+          accData: this.props.profileData,
+          isMe: true
+        });
+      } else {
+        let currentAcc = await axios.get(host + '/account/' + nextProp.match.params.publicKey);
+        this.setState({
+          accData: currentAcc.data,
+          isMe: false
+        });
+      }
+    }
   }
 
   render() {
-    let element;
-    if (this.state.screen === '0') element = <Posts />;
-    else if (this.state.screen === '1') element = <Exchanges />;
+    if (!this.props.profileData) {
+      return <Redirect to="/login" />;
+    }
+
+    let element = this.state.screen === '0' ? 
+                    <Posts posts={this.state.accData.tx.post} accInfo={this.state.accData.info}/> : 
+                    <Exchanges exchanges={Object.assign({}, this.state.accData.tx.send, this.state.accData.tx.receive)} />
 
     return (
       <div>
         <Navibar />
-        <Headers setScreen={this.setScreen} />
+        <Headers setScreen={this.setScreen} accInfo={this.state.accData.info} isMe={this.state.isMe} />
         <Grid container spacing={32}>
           <Grid item xs={1} />
           <Grid item xs={3}>
@@ -54,14 +94,10 @@ class Profile extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return ({
-    getProfileData: (publicKey) => dispatch(getProfileData(publicKey))
-  })
+const mapStateToProps = (state) => {
+  return {
+    profileData: state.myProfile.profileData
+  }
 }
 
-
-export default withRouter(connect(
-  null,
-  mapDispatchToProps
-)(Profile));
+export default connect(mapStateToProps, null)(Profile);

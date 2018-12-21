@@ -1,28 +1,30 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 
 import Post from './Post';
 import '../../../Style/TimelinePost.css';
 
 class Posts extends Component {
   render() {
-    const profileData = Object.assign({}, this.props.myProfile.profileData);
-    const tx = Object.assign({}, profileData.tx);
-    const post = Object.assign({}, tx.post);
-    const posts = Object.values(post)
+    const posts = this.props.posts;
+    const accInfo = this.props.accInfo;
 
-    const info = Object.assign({}, profileData.info);
-    const name = info.name;
-    const public_key = info.public_key;
-    const imageStr = `data:image/png;base64,${info.picture}`;
+    let postsArr = [];
 
-    let elements = posts.map((post) => {
+    for (let key in posts) {
+      let temp = posts[key];
+      temp.hash = key;
+      postsArr.push(temp);
+    }
+
+    let elements = postsArr.map((post) => {
       return <Post
-        name={name}
-        public_key={public_key}
-        imageStr={imageStr}
+        name={accInfo.name}
+        public_key={accInfo.public_key}
+        imageStr={`data:image/png;base64,${accInfo.picture}`}
         content={post.content}
         time={post.time}
+        key={post.hash}
+        hash={post.hash}
       />
     })
     return (
@@ -33,11 +35,4 @@ class Posts extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  myProfile: state.myProfile
-})
-
-export default connect(
-  mapStateToProps,
-  null
-)(Posts)
+export default Posts;

@@ -1,4 +1,4 @@
-const myProfile = (state = {profileData: null}, action) => {
+const myProfile = (state = { profileData: null }, action) => {
   switch (action.type) {
     case 'SET_PROFILE_DATA':
       return {
@@ -16,7 +16,10 @@ const myProfile = (state = {profileData: null}, action) => {
         address: action.address,
         birthday: action.birthday,
       }
-
+    case 'LOG_OUT':
+      return {
+        profileData: null
+      }
     default:
       return state;
   }

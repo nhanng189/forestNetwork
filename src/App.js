@@ -28,7 +28,7 @@ class App extends Component {
 }
 
 function NoMatch(props) {
-    return <p>404 Not Found</p>;
+    return <h3 style={{textAlign: 'center', backgroundColor: 'none'}}>Error 404: Not Found</h3>;
 }
 
 const mapStateToProps = (state) => {
@@ -37,6 +37,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(
-    mapStateToProps,
-    null)(App);
+export default connect(mapStateToProps, null)(App);

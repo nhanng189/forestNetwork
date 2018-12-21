@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link, withRouter } from 'react-router-dom';
 import moment from 'moment';
 
 import Card from '@material-ui/core/Card';
@@ -33,7 +34,7 @@ class Information extends React.Component {
               <ListItemText>
                 <div className="tlp-title">
                   <span style={{fontWeight: 'bold'}}>Created by: </span>
-                  <a href={'/account/' + createdBy}>View detail</a>
+                  <Link to={'/account/' + createdBy}>View detail</Link>
                 </div>
               </ListItemText>
             </ListItem>
@@ -81,7 +82,7 @@ const mapStateToProps = (state) => ({
   myProfile: state.myProfile
 });
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   null
-)(Information);
+)(Information));

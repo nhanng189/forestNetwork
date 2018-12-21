@@ -16,11 +16,10 @@ class Explorer extends Component {
     }
 }
 
-export default withRouter(connect(
-    function(state) {
-        return {
-            profileData: state.myProfile.profileData
-        }
-    },
-    null
-)(Explorer));
+const mapStateToProps = (state) => {
+    return {
+        profileData: state.myProfile.profileData
+    }
+}
+
+export default withRouter(connect(mapStateToProps, null)(Explorer));
