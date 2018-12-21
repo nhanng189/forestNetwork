@@ -39,8 +39,7 @@ class Signin extends Component {
       axios.get(host + '/account/' + this.state.publicKey)
         .then((res) => {
             if(res.data.account_not_exists) {
-                // Handle this
-                console.log('Account does not exist')
+                alert('Account does not exist');
             } else {
                 this.props.setProfileData(res.data);
                 this.props.history.push('/');

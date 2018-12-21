@@ -1,6 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import moment from 'moment';
 
 import Card from '@material-ui/core/Card';
@@ -15,14 +14,6 @@ import WorkIcon from '@material-ui/icons/Work';
 
 class Information extends React.Component {
   render() {
-    const profileData = Object.assign({}, this.props.myProfile.profileData);
-    const info = Object.assign({}, profileData.info);
-
-    const createdBy = info.created_by;
-    const createdAt = info.created_at;
-    const sequence = info.sequence;
-    const energy = info.energy;
-
     return (
       <div>
         <Card style={{ marginTop: "50px" }}>
@@ -33,8 +24,8 @@ class Information extends React.Component {
               </ListItemIcon>
               <ListItemText>
                 <div className="tlp-title">
-                  <span style={{fontWeight: 'bold'}}>Created by: </span>
-                  <Link to={'/account/' + createdBy}>View detail</Link>
+                  <span style={{ fontWeight: 'bold' }}>Created by: </span>
+                  <Link to={'/account/' + this.props.accInfo.created_by}>View detail</Link>
                 </div>
               </ListItemText>
             </ListItem>
@@ -44,8 +35,8 @@ class Information extends React.Component {
               </ListItemIcon>
               <ListItemText>
                 <div className="tlp-title">
-                  <span style={{fontWeight: 'bold'}}>Join: </span>
-                  {moment(createdAt).format('MMMM Do YYYY')}
+                  <span style={{ fontWeight: 'bold' }}>Join: </span>
+                  {moment(this.props.accInfo.created_at).format('MMMM Do YYYY')}
                 </div>
               </ListItemText>
             </ListItem>
@@ -55,8 +46,8 @@ class Information extends React.Component {
               </ListItemIcon>
               <ListItemText>
                 <div className="tlp-title">
-                  <span style={{fontWeight: 'bold'}}>Sequence: </span>
-                  {sequence}
+                  <span style={{ fontWeight: 'bold' }}>Sequence: </span>
+                  {this.props.accInfo.sequence}
                 </div>
               </ListItemText>
             </ListItem>
@@ -66,8 +57,8 @@ class Information extends React.Component {
               </ListItemIcon>
               <ListItemText>
                 <div className="tlp-title">
-                  <span style={{fontWeight: 'bold'}}>Energy: </span>
-                  {energy}
+                  <span style={{ fontWeight: 'bold' }}>Energy: </span>
+                  {this.props.accInfo.energy}
                 </div>
               </ListItemText>
             </ListItem>
@@ -78,11 +69,4 @@ class Information extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  myProfile: state.myProfile
-});
-
-export default withRouter(connect(
-  mapStateToProps,
-  null
-)(Information));
+export default Information;

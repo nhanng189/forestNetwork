@@ -146,7 +146,7 @@ const myPosts = (state = initState, action) => {
 
     case 'ADD_COMMENT':
       return state.map((post) => {
-        if (post.id == action.id) {
+        if (post.id === action.id) {
           post.commentContent.push(action.commentContent);
           post.comment = post.comment + 1;
         }

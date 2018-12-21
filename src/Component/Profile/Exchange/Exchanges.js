@@ -1,52 +1,56 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-
 import Grid from '@material-ui/core/Grid';
 import Exchange from './Exchange';
 import '../../../Style/TimelinePost.css';
 
 class Exchanges extends Component {
   render() {
-    const profileData = Object.assign({}, this.props.myProfile.profileData);
-    const tx = Object.assign({}, profileData.tx);
+    const send = this.props.exchanges.send;
+    const receive = this.props.exchanges.receive;
 
-    const receive = Object.assign({}, tx.receive);
-    const receives = Object.values(receive)
+    let sendArr = [];
+    let receiveArr = [];
 
-    const send = Object.assign({}, tx.send);
-    const sends = Object.values(send)
+    for (let key in send) {
+      let temp = send[key];
+      temp.hash = key;
+      sendArr.push(temp);
+    }
 
-    const info = Object.assign({}, profileData.info);
-    const name = info.name;
-    const imageStr = `data:image/png;base64,${info.picture}`;
+    for (let key in receive) {
+      let temp = receive[key];
+      temp.hash = key;
+      receiveArr.push(temp);
+    }
 
-    let receiveElement = receives.map((receive) => {
+    let sendElements = sendArr.map((send) => {
       return <Exchange
-        name={name}
-        imageStr={imageStr}
-        amount={receive.amount}
-        from={receive.from}
-        time={receive.time}
-      />
-    })
-
-    let sendElement = sends.map((send) => {
-      return <Exchange
-        name={name}
-        imageStr={imageStr}
         amount={send.amount}
         to={send.to}
         time={send.time}
+        key={send.hash}
+        hash={send.hash}
       />
     })
+
+    let receiveElements = receiveArr.map((receive) => {
+      return <Exchange
+        amount={receive.amount}
+        from={receive.from}
+        time={receive.time}
+        key={receive.hash}
+        hash={receive.hash}
+      />
+    })
+
     return (
       <div style={{ marginTop: "50px" }}>
         <Grid container spacing={32}>
           <Grid item xs={6}>
-            {receiveElement}
+            {sendElements}
           </Grid>
           <Grid item xs={6}>
-            {sendElement}
+            {receiveElements}
           </Grid>
         </Grid>
       </div >
@@ -54,11 +58,4 @@ class Exchanges extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  myProfile: state.myProfile
-})
-
-export default connect(
-  mapStateToProps,
-  null
-)(Exchanges)
+export default Exchanges;

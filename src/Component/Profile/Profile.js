@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { withRouter, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getProfileData } from '../../actions';
 import axios from 'axios';
 import host from '../../Host';
 
@@ -73,7 +72,7 @@ class Profile extends Component {
 
     let element = this.state.screen === '0' ? 
                     <Posts posts={this.state.accData.tx.post} accInfo={this.state.accData.info}/> : 
-                    <Exchanges exchanges={Object.assign({}, this.state.accData.tx.send, this.state.accData.tx.receive)} />
+                    <Exchanges exchanges={{send: this.state.accData.tx.send, receive: this.state.accData.tx.receive}} />
 
     return (
       <div>
@@ -82,7 +81,7 @@ class Profile extends Component {
         <Grid container spacing={32}>
           <Grid item xs={1} />
           <Grid item xs={3}>
-            <Information />
+            <Information accInfo={this.state.accData.info} />
           </Grid>
           <Grid item xs={7}>
             {element}
