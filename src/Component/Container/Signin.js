@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
@@ -52,32 +52,36 @@ class Signin extends Component {
   }
 
   render() {
-    return (
-      <div className="signin-container background">
-        <div className="signin-app-title">MẠNG TRONG RỪNG</div>
-        <Grid container justify="center" alignItems="center">
-          <Card className="card">
-            <div className="card-content">
-              <h4 style={{ textAlign: "center", fontWeight: "bold"}}>Chào mừng đến với mạng rừng!</h4>
-              <form onSubmit={this.onSubmit} noValidate autoComplete="off">
-                <TextField
-                  style={{ marginTop: "35px", marginBottom: "35px"}}
-                  name="publicKey"
-                  label="Public key"
-                  value={this.state.publicKey}
-                  onChange={this.onChange}
-                  fullWidth
-                />
-              </form>
-              <Button onClick={this.handleClick} size="large" variant="extendedFab" color="secondary">
-                <h6>Đăng nhập</h6>
-              </Button>
+        if(this.props.profileData) {
+            return <Redirect to="/" />
+        }
+
+        return (
+            <div className="signin-container background">
+                <div className="signin-app-title">MẠNG TRONG RỪNG</div>
+                <Grid container justify="center" alignItems="center">
+                <Card className="card">
+                    <div className="card-content">
+                    <h4 style={{ textAlign: "center", fontWeight: "bold"}}>Chào mừng đến với mạng rừng!</h4>
+                    <form onSubmit={this.onSubmit} noValidate autoComplete="off">
+                        <TextField
+                        style={{ marginTop: "35px", marginBottom: "35px"}}
+                        name="publicKey"
+                        label="Public key"
+                        value={this.state.publicKey}
+                        onChange={this.onChange}
+                        fullWidth
+                        />
+                    </form>
+                    <Button onClick={this.handleClick} size="large" variant="extendedFab" color="secondary">
+                        <h6>Đăng nhập</h6>
+                    </Button>
+                    </div>
+                </Card>
+                </Grid>
             </div>
-          </Card>
-        </Grid>
-      </div>
-    );
-  }
+        );
+    }
 }
 
 const mapStateToProps = (state) => {

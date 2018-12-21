@@ -19,6 +19,7 @@ class App extends Component {
             <Route exact path="/" component={Explorer} />
             <Route path="/login" component={Signin} />
             <Route path="/account/:publicKey" component={Profile} />
+            <Route component={NoMatch} />
           </Switch>
         </Router>
       </div>
@@ -26,9 +27,13 @@ class App extends Component {
   }
 }
 
+function NoMatch(props) {
+    return <p>404 Not Found</p>;
+}
+
 const mapStateToProps = (state) => {
     return {
-        myProfile: state.myProfile
+        profileData: state.myProfile.profileData
     }
 }
 
