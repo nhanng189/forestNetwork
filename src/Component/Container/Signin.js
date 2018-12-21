@@ -43,7 +43,7 @@ class Signin extends Component {
                 console.log('Account does not exist')
             } else {
                 this.props.setProfileData(res.data);
-                this.props.history.push('/account/' + this.state.publicKey);
+                this.props.history.push('/');
             }
         })
         .catch((err) => {
@@ -80,13 +80,19 @@ class Signin extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        profileData: state.myProfile.profileData
+    }
+}
+
 const mapDispatchToProps = (dispatch) => {
-    return ({
+    return {
         setProfileData: (data) => dispatch(setProfileData(data))
-    });
+    };
 }
 
 export default withRouter(connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
 )(Signin));

@@ -3,6 +3,7 @@ import { Router, Route, Switch, Redirect } from 'react-router';
 import { connect } from 'react-redux';
 import { createBrowserHistory } from 'history';
 
+import Explorer from './Component/Container/Explorer';
 import Signin from './Component/Container/Signin';
 import Profile from './Component/Profile/Profile';
 import './App.css';
@@ -15,10 +16,9 @@ class App extends Component {
       <div className="gra">
         <Router history={hist}>
           <Switch>
+            <Route exact path="/" component={Explorer} />
             <Route path="/login" component={Signin} />
             <Route path="/account/:publicKey" component={Profile} />
-
-            {!this.props.myProfile.profileData && <Redirect to="/login" />}
           </Switch>
         </Router>
       </div>

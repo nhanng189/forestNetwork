@@ -38,7 +38,7 @@ class Navibar extends Component {
               />
               <div className="flexgrow" />
               <Button component={Link} to="/" className="page-button" color="inherit">EXPLORE</Button>
-              <Button className="page-button" color="inherit">HOME</Button>
+              <Button className="page-button" color="inherit">MY WALL</Button>
               <Button className="page-button" color="inherit">PAYMENT</Button>
               <Button className="page-button" color="inherit">CREATE ACCOUNT</Button>
               <Button style={{ height: "35px", backgroundColor: "#a000a5", fontSize: "11px", color: "white", padding: "2px 10px 2px 7px", marginLeft: "25px" }} variant="contained" onClick={this.selectedPickImage}>
