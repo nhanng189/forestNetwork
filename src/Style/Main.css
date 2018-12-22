@@ -1,0 +1,14 @@
+.main-container {
+    width: 800px;
+    margin: 90px auto;
+    padding: 50px;
+}
+
+.payment h4 {
+    text-align: center;
+    font-weight: bold;
+}
+
+.payment input {
+    font-size: 1.5em;
+}

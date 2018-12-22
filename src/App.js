@@ -5,6 +5,7 @@ import { createBrowserHistory } from 'history';
 import Explorer from './Component/Container/Explorer';
 import Signin from './Component/Container/Signin';
 import Profile from './Component/Profile/Profile';
+import Payment from './Component/Container/Payment';
 import './App.css';
 
 var hist = createBrowserHistory();
@@ -17,6 +18,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={Explorer} />
             <Route path="/login" component={Signin} />
+            <Route path="/payment" component={Payment} />
             <Route path="/account/:publicKey" component={Profile} />
             <Route component={NoMatch} />
           </Switch>
