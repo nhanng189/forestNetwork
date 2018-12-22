@@ -29,39 +29,25 @@ class Profile extends Component {
     })
   }
 
-  componentWillMount = async () => {
-    if(!this.props.profileData) {
-      return <Redirect to="/login" />;
-    }
-
-    if(this.props.profileData.info.public_key === this.props.match.params.publicKey) {
-      this.setState({
-        accData: this.props.profileData,
-        isMe: true
-      });
-    } else {
-      let currentAcc = await axios.get(host + '/account/' + this.props.match.params.publicKey);
-      this.setState({
-        accData: currentAcc,
-        isMe: false
-      });
-    }
+  componentDidMount() {
+    axios.get(host + '/account/' + this.props.match.params.publicKey)
+      .then(res => {
+        this.setState({
+          accData: res.data,
+          isMe: this.props.match.params.publicKey === this.props.profileData.info.public_key 
+        });
+      })
   }
 
-  componentWillReceiveProps = async (nextProp) => {
-    if(this.props.match.params.publicKey !== nextProp.match.params.publicKey) {
-      if(this.props.profileData.info.public_key === nextProp.match.params.publicKey) {
-        this.setState({
-          accData: this.props.profileData,
-          isMe: true
-        });
-      } else {
-        let currentAcc = await axios.get(host + '/account/' + nextProp.match.params.publicKey);
-        this.setState({
-          accData: currentAcc.data,
-          isMe: false
-        });
-      }
+  componentWillReceiveProps(nextProp) {
+    if (this.props.match.params.publicKey !== nextProp.match.params.publicKey) {
+      axios.get(host + '/account/' + nextProp.match.params.publicKey)
+        .then(res => {
+          this.setState({
+            accData: res.data,
+            isMe: nextProp.match.params.PublicKey === this.props.profileData.info.public_key
+          })
+        })
     }
   }
 
@@ -70,18 +56,26 @@ class Profile extends Component {
       return <Redirect to="/login" />;
     }
 
-    let element = this.state.screen === '0' ? 
-                    <Posts posts={this.state.accData.tx.post} accInfo={this.state.accData.info}/> : 
-                    <Exchanges exchanges={{send: this.state.accData.tx.send, receive: this.state.accData.tx.receive}} />
+    let element = null;
+
+    if (this.state.screen === '0') {
+      if (this.state.accData.tx && this.state.accData.info) {
+        element = <Posts posts={this.state.accData.tx.post} accInfo={this.state.accData.info} />
+      }
+    } else {
+      if (this.state.accData.tx) {
+        element = <Exchanges exchanges={{ send: this.state.accData.tx.send, receive: this.state.accData.tx.receive }} />
+      }
+    }
 
     return (
       <div>
         <Navibar />
-        <Headers setScreen={this.setScreen} accInfo={this.state.accData.info} isMe={this.state.isMe} />
+        {this.state.accData.info && <Headers setScreen={this.setScreen} accInfo={this.state.accData.info} isMe={this.state.isMe} />}
         <Grid container spacing={32}>
           <Grid item xs={1} />
           <Grid item xs={3}>
-            <Information accInfo={this.state.accData.info} />
+            {this.state.accData.info && <Information accInfo={this.state.accData.info} />}
           </Grid>
           <Grid item xs={7}>
             {element}
