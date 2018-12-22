@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { editProfile } from '../actions'
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -9,28 +8,20 @@ import Dialog from '@material-ui/core/Dialog';
 import TextField from '@material-ui/core/TextField';
 import { Button } from '@material-ui/core';
 
+import { makeUpdateNameTx } from '../util';
+
 class EditDialog extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      name: ""
+      name: ''
     }
   }
 
-  componentWillMount() {
+  onChange = (e) => {
     this.setState({
-      name: this.props.myProfile.name,
-    })
-  }
-
-  onChange = (event) => {
-    var target = event.target;
-    var value = target.value;
-    var name = target.name;
-
-    this.setState({
-      [name]: value
+      name: e.target.value
     })
   }
 
@@ -38,14 +29,29 @@ class EditDialog extends React.Component {
     this.props.onClose();
   };
 
-  onEdit = () => {
-    const { name } = this.state;
-    this.props.editProfile(name);
-    this.handleClose();
+  onEdit = async () => {
+    try {
+      let res = await makeUpdateNameTx(
+        parseInt(this.props.profileData.info.sequence) + 1,
+        this.state.name,
+        sessionStorage.getItem('forest_network_account')
+      );
+
+      if (res.result.check_tx.code) {
+        alert('ERROR ' + res.result.check_tx.log);
+      } else {
+        alert('Đổi tên thành công');
+        this.setState({
+          name: '',
+        });
+      }
+    } catch (err) {
+      alert('ERROR ' + err.message);
+    }
   }
 
   render() {
-    const { onClose, ...other } = this.props;
+    const { ...other } = this.props;
 
     return (
       <Dialog {...other}>
@@ -79,14 +85,7 @@ class EditDialog extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  myProfile: state.myProfile
+  profileData: state.myProfile.profileData
 })
 
-const mapDispatchToProps = dispatch => ({
-  editProfile: (name) => dispatch(editProfile(name))
-})
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(EditDialog)
+export default connect(mapStateToProps, null)(EditDialog)

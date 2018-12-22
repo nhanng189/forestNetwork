@@ -35,7 +35,7 @@ class Profile extends Component {
         .then(res => {
           this.setState({
             accData: res.data,
-            isMe: this.props.match.params.publicKey === this.props.profileData.info.public_key
+            isMe: this.props.profileData ? (this.props.match.params.publicKey === this.props.profileData.info.public_key) : false
           });
         })
     }, 2000);

@@ -8,15 +8,13 @@ import '../../Style/Main.css';
 import { CardContent, TextField } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 
-import { makePaymentTx } from '../../util';
+import { makePostTx } from '../../util';
 
-class Payment extends Component {
+class NewPost extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            publicKey: '',
-            amount: '',
-            message: ''
+            content: '',
         }
     }
 
@@ -26,38 +24,25 @@ class Payment extends Component {
         });
     }
 
-    onCancel = () => {
-        this.setState({
-            publicKey: '',
-            amount: 0,
-            message: ''
-        })
-    }
-
     onSubmit = async () => {
         try {
-            let res = await makePaymentTx(
+            let res = await makePostTx(
                 parseInt(this.props.profileData.info.sequence) + 1,
-                this.state.message,
-                this.state.publicKey,
-                parseInt(this.state.amount),
+                this.state.content,
                 sessionStorage.getItem('forest_network_account')
             )
 
             if (res.result.check_tx.code) {
                 alert('ERROR ' + res.result.check_tx.log);
             } else {
-                alert('Chuyển tiền thành công');
+                alert('Đăng bài thành công');
                 this.setState({
-                    publicKey: '',
-                    amount: '',
-                    message: ''
+                    content: '',
                 });
             }
         } catch (err) {
             alert('ERROR ' + err.message);
         }
-
     }
 
     render() {
@@ -71,41 +56,22 @@ class Payment extends Component {
                 <div className="main-container payment">
                     <Card>
                         <CardContent>
-                            <h4>Chuyển tiền đến tài khoản khác</h4>
+                            <h4>Đăng bài viết mới</h4>
                             <TextField
-                                label="Public Key"
-                                name="publicKey"
-                                value={this.state.publicKey}
-                                onChange={this.onChange}
-                                variant="outlined"
-                                margin="normal"
-                                fullWidth
-                            />
-                            <TextField
-                                label="Amount"
-                                name="amount"
-                                value={this.state.amount}
-                                onChange={this.onChange}
-                                type="number"
-                                variant="outlined"
-                                margin="normal"
-                                fullWidth
-                            />
-                            <TextField
-                                label="Message"
-                                name="message"
-                                value={this.state.message}
+                                label="What do you think?"
+                                multiline
+                                rowsMax="8"
+                                rows="3"
+                                name="content"
+                                value={this.state.content}
                                 onChange={this.onChange}
                                 variant="outlined"
                                 margin="normal"
                                 fullWidth
                             />
                             <div style={{ textAlign: 'center' }}>
-                                <Button variant="contained" style={{ margin: '10px' }} onClick={this.onCancel}>
-                                    Nhập lại
-                                </Button>
                                 <Button variant="contained" style={{ margin: '10px' }} onClick={this.onSubmit} color="secondary">
-                                    Xác nhận
+                                    Đăng bài
                                 </Button>
                             </div>
                         </CardContent>
@@ -122,4 +88,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, null)(Payment);
+export default connect(mapStateToProps, null)(NewPost);

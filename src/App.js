@@ -6,6 +6,8 @@ import Explorer from './Component/Container/Explorer';
 import Signin from './Component/Container/Signin';
 import Profile from './Component/Profile/Profile';
 import Payment from './Component/Container/Payment';
+import CreateAcc from './Component/Container/CreateAcc';
+import NewPost from './Component/Container/NewPost';
 import './App.css';
 
 var hist = createBrowserHistory();
@@ -20,6 +22,8 @@ class App extends Component {
             <Route path="/login" component={Signin} />
             <Route path="/payment" component={Payment} />
             <Route path="/account/:publicKey" component={Profile} />
+            <Route path="/create" component={CreateAcc} />
+            <Route path="/post" component={NewPost} />
             <Route component={NoMatch} />
           </Switch>
         </Router>

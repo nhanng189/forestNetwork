@@ -14,7 +14,7 @@ export function encodeTx(tx) {
 
     default:
       throw Error('Unsupport version');
-  };
+  }
 }
 
 export function decodeTx(data) {
@@ -22,7 +22,7 @@ export function decodeTx(data) {
   switch (versionTx.version) {
     case 1:
       return decode(data);
-    
+
     default:
       throw Error('Unsupport version');
   }
