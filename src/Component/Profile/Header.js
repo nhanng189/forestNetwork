@@ -75,7 +75,7 @@ class Header extends Component {
             </div>
           </div>
           <CardMedia style={{ height: "250px" }}
-            image={this.props.myProfile.wallpaper}>
+            src="http://mkkr.biz/wp-content/uploads/css3-background-patterns-css-light-live-background-people.jpg">
           </CardMedia>
           <CardActions >
             <div style={{ zIndex: "1001", marginLeft: "420px" }}>

@@ -16,55 +16,55 @@ import { setProfileData } from '../../actions';
 
 class Signin extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      privateKey: ''
+    constructor(props) {
+        super(props);
+        this.state = {
+            privateKey: ''
+        }
     }
-  }
 
-  onChange = (event) => {
-    var target = event.target;
-    var value = target.value;
-    var name = target.name;
+    onChange = (event) => {
+        var target = event.target;
+        var value = target.value;
+        var name = target.name;
 
-    this.setState({
-      [name]: value
-    })
-  }
+        this.setState({
+            [name]: value
+        })
+    }
 
-  onSubmit = (event) => {
-    event.preventDefault();
-  }
+    onSubmit = (event) => {
+        event.preventDefault();
+    }
 
-  handleClick = () => {
-      let publicKey;
+    handleClick = () => {
+        let publicKey;
 
-      try {
-          publicKey = Keypair.fromSecret(this.state.privateKey).publicKey();
-      } catch (err) {
+        try {
+            publicKey = Keypair.fromSecret(this.state.privateKey).publicKey();
+        } catch (err) {
             alert('Wrong Private Key Format');
             return;
-      }
+        }
 
-      axios.get(host + '/account/' + publicKey)
-        .then((res) => {
-            if(res.data.account_not_exists) {
-                alert('Account does not exist');
-            } else {
-                let privateKey_en = encode_key(this.state.privateKey);
-                this.props.setProfileData(res.data);
-                sessionStorage.setItem('forest_network_account', privateKey_en);
-                this.props.history.push('/');
-            }
-        })
-        .catch((err) => {
+        axios.get(host + '/account/' + publicKey)
+            .then((res) => {
+                if (res.data.account_not_exists) {
+                    alert('Account does not exist');
+                } else {
+                    let privateKey_en = encode_key(this.state.privateKey);
+                    this.props.setProfileData(res.data);
+                    sessionStorage.setItem('forest_network_account', privateKey_en);
+                    this.props.history.push('/');
+                }
+            })
+            .catch((err) => {
 
-        })
-  }
+            })
+    }
 
-  render() {
-        if(this.props.profileData) {
+    render() {
+        if (this.props.profileData) {
             return <Redirect to="/" />
         }
 
@@ -72,24 +72,24 @@ class Signin extends Component {
             <div className="signin-container background">
                 <div className="signin-app-title">MẠNG TRONG RỪNG</div>
                 <Grid container justify="center" alignItems="center">
-                <Card className="card">
-                    <div className="card-content">
-                    <h4 style={{ textAlign: "center", fontWeight: "bold"}}>Chào mừng đến với mạng rừng!</h4>
-                    <form onSubmit={this.onSubmit} noValidate autoComplete="off">
-                        <TextField
-                        style={{ marginTop: "35px", marginBottom: "35px"}}
-                        name="privateKey"
-                        label="Private Key"
-                        value={this.state.privateKey}
-                        onChange={this.onChange}
-                        fullWidth
-                        />
-                    </form>
-                    <Button onClick={this.handleClick} size="large" variant="extendedFab" color="secondary">
-                        <h6>Đăng nhập</h6>
-                    </Button>
-                    </div>
-                </Card>
+                    <Card className="card">
+                        <div className="card-content">
+                            <h4 style={{ textAlign: "center", fontWeight: "bold" }}>Chào mừng đến với mạng rừng!</h4>
+                            <form onSubmit={this.onSubmit} noValidate autoComplete="off">
+                                <TextField
+                                    style={{ marginTop: "35px", marginBottom: "35px" }}
+                                    name="privateKey"
+                                    label="Private Key"
+                                    value={this.state.privateKey}
+                                    onChange={this.onChange}
+                                    fullWidth
+                                />
+                            </form>
+                            <Button onClick={this.handleClick} size="large" variant="extendedFab" color="secondary">
+                                <h6>Đăng nhập</h6>
+                            </Button>
+                        </div>
+                    </Card>
                 </Grid>
             </div>
         );

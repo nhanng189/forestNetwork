@@ -30,13 +30,19 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-    axios.get(host + '/account/' + this.props.match.params.publicKey)
-      .then(res => {
-        this.setState({
-          accData: res.data,
-          isMe: this.props.match.params.publicKey === this.props.profileData.info.public_key 
-        });
-      })
+    this.interval = setInterval(() => {
+      axios.get(host + '/account/' + this.props.match.params.publicKey)
+        .then(res => {
+          this.setState({
+            accData: res.data,
+            isMe: this.props.match.params.publicKey === this.props.profileData.info.public_key
+          });
+        })
+    }, 2000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   componentWillReceiveProps(nextProp) {
