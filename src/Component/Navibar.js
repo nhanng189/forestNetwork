@@ -16,8 +16,33 @@ import Logo1 from '../icons/logo1.png';
 import '../Style/Navibar.css';
 
 class Navibar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      publicKey: ''
+    }
+  }
+
+  handleSubmit = (e) => {
+    if(e.key === 'Enter') {
+      let key = this.state.publicKey;
+
+      if(key === '') {
+        alert('Vui lòng nhập Public Key để đến trang cá nhân người dùng');
+      } else {
+        this.props.history.push('/account/' + key);
+      }
+    }
+  }
+
+  handleChange = (e) => {
+    this.setState({
+      publicKey: e.target.value
+    });
+  }
+
   render() {
-    if(!this.props.profileData) {
+    if (!this.props.profileData) {
       return <Redirect to="/login" />;
     }
 
@@ -33,6 +58,8 @@ class Navibar extends Component {
                 className="search"
                 variant="outlined"
                 placeholder="Enter user's public key ..."
+                onKeyPress={this.handleSubmit}
+                onChange={this.handleChange}
                 InputProps={{
                   startAdornment: <InputAdornment position="start"><SearchIcon /></InputAdornment>,
                 }}
@@ -46,7 +73,7 @@ class Navibar extends Component {
                 <AddIcon />New post
               </Button>
               <Button className="page-button" disabled color="inherit">|</Button>
-              <Button onClick={() => {this.props.logOut()}} className="page-button" color="inherit">LOGOUT</Button>
+              <Button onClick={() => { this.props.logOut() }} className="page-button" color="inherit">LOGOUT</Button>
             </Toolbar>
           </Grid>
           <Grid item xs={1} />

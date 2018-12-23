@@ -81,7 +81,7 @@ class Profile extends Component {
         <Grid container spacing={32}>
           <Grid item xs={1} />
           <Grid item xs={3}>
-            {this.state.accData.info && <Information accInfo={this.state.accData.info} />}
+            {this.state.accData.info && <Information accInfo={this.state.accData.info} isMe={this.state.isMe} />}
           </Grid>
           <Grid item xs={7}>
             {element}

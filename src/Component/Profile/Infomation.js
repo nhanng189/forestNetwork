@@ -12,12 +12,13 @@ import BatteryIcon from '@material-ui/icons/BatteryFull';
 import AddIcon from '@material-ui/icons/AddCircle';
 import WorkIcon from '@material-ui/icons/Work';
 import MoneyIcon from '@material-ui/icons/AttachMoney';
+import Button from '@material-ui/core/Button';
 
 class Information extends React.Component {
   render() {
     return (
       <div>
-        <Card style={{ marginTop: "50px" }}>
+        <Card style={{ marginTop: "50px", textAlign: 'center' }}>
           <List>
             <ListItem>
               <ListItemIcon>
@@ -75,6 +76,16 @@ class Information extends React.Component {
               </ListItemText>
             </ListItem>
           </List>
+          {!this.props.isMe &&
+            <div>
+              <Button variant="outlined" color="secondary" style={{ margin: '10px auto', fontSize: '1.5em' }}>
+                Theo dõi
+              </Button>
+              <Button variant="outlined" disable style={{ margin: '10px auto', fontSize: '1.5em' }}>
+                Bỏ theo dõi
+              </Button>
+            </div>
+          }
         </Card>
       </div>
     );
