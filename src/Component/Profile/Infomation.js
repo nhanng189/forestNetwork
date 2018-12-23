@@ -11,6 +11,7 @@ import CakeIcon from '@material-ui/icons/Cake';
 import BatteryIcon from '@material-ui/icons/BatteryFull';
 import AddIcon from '@material-ui/icons/AddCircle';
 import WorkIcon from '@material-ui/icons/Work';
+import MoneyIcon from '@material-ui/icons/AttachMoney';
 
 class Information extends React.Component {
   render() {
@@ -58,7 +59,18 @@ class Information extends React.Component {
               <ListItemText>
                 <div className="tlp-title">
                   <span style={{ fontWeight: 'bold' }}>Energy: </span>
-                  {this.props.accInfo.energy}
+                  {this.props.accInfo.energy} (OXY)
+                </div>
+              </ListItemText>
+            </ListItem>
+            <ListItem>
+              <ListItemIcon>
+                <MoneyIcon />
+              </ListItemIcon>
+              <ListItemText>
+                <div className="tlp-title">
+                  <span style={{ fontWeight: 'bold' }}>Balance: </span>
+                  {this.props.accInfo.balance} (CEL)
                 </div>
               </ListItemText>
             </ListItem>

@@ -12,7 +12,8 @@ import PhotoIcon from '@material-ui/icons/InsertPhoto';
 
 import FollowingDialog from '../Following';
 import FollowersDialog from '../Followers';
-import EditDialog from '../Edit';
+import EditNameDialog from '../Edit';
+import EditAvatarDialog from '../EditAvatar';
 
 class Header extends Component {
 
@@ -21,7 +22,8 @@ class Header extends Component {
     this.state = {
       followersOpen: false,
       followingOpen: false,
-      editOpen: false
+      editNameOpen: false,
+      editAvatarOpen: false
     }
   }
 
@@ -37,17 +39,24 @@ class Header extends Component {
     })
   }
 
-  handleEditOpen = () => {
+  handleEditNameOpen = () => {
     this.setState({
-      editOpen: true
+      editNameOpen: true
     })
+  }
+
+  handleEditAvatarOpen = () => {
+    this.setState({
+      editAvatarOpen: true
+    });
   }
 
   handleClose = () => {
     this.setState({
       followersOpen: false,
       followingOpen: false,
-      editOpen: false
+      editNameOpen: false,
+      editAvatarOpen: false
     });
   };
 
@@ -58,20 +67,20 @@ class Header extends Component {
   render() {
     return (
       <div>
-        <Card style={{ marginTop: "90px", height: "320px", backgroundImage: "url(http://mkkr.biz/wp-content/uploads/css3-background-patterns-css-light-live-background-people.jpg)"}}>
+        <Card style={{ marginTop: "90px", height: "320px", backgroundImage: "url(http://mkkr.biz/wp-content/uploads/css3-background-patterns-css-light-live-background-people.jpg)" }}>
           <div style={{ zIndex: "1000", position: "absolute", marginLeft: "184px", marginTop: "150px" }}>
             <Avatar style={{ border: "5px white solid", float: "left", width: "200px", height: "200px" }} alt="" src={`data:image/png;base64,${this.props.accInfo.picture}`} />
             <div style={{ float: "left", fontSize: "35px", fontWeight: "bolder", marginLeft: "50px", marginTop: "25px" }}>
               {this.props.accInfo.name}
               &nbsp;
-              {this.props.isMe && 
-              <IconButton onClick={this.handleEditOpen} style={{ marginBottom: "5px" }}>
-                <EditIcon />
-              </IconButton>}
-              {this.props.isMe && 
-              <IconButton onClick={this.handleEditOpen} style={{ marginBottom: "5px" }}>
-                <PhotoIcon />
-              </IconButton>}
+              {this.props.isMe &&
+                <IconButton onClick={this.handleEditNameOpen} style={{ marginBottom: "5px" }}>
+                  <EditIcon />
+                </IconButton>}
+              {this.props.isMe &&
+                <IconButton onClick={this.handleEditAvatarOpen} style={{ marginBottom: "5px" }}>
+                  <PhotoIcon />
+                </IconButton>}
             </div>
           </div>
           <CardMedia style={{ height: "250px" }}
@@ -118,8 +127,12 @@ class Header extends Component {
           open={this.state.followingOpen}
           onClose={this.handleClose}
         />
-        <EditDialog
-          open={this.state.editOpen}
+        <EditNameDialog
+          open={this.state.editNameOpen}
+          onClose={this.handleClose}
+        />
+        <EditAvatarDialog
+          open={this.state.editAvatarOpen}
           onClose={this.handleClose}
         />
       </div>
