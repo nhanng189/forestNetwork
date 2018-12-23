@@ -19,7 +19,8 @@ class Profile extends Component {
     this.state = {
       isMe: true,
       screen: '0',
-      accData: {}
+      accData: {},
+      isFollowed: false
     }
   }
 
@@ -29,19 +30,22 @@ class Profile extends Component {
     })
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.interval = setInterval(() => {
       axios.get(host + '/account/' + this.props.match.params.publicKey)
         .then(res => {
           this.setState({
             accData: res.data,
-            isMe: this.props.profileData ? (this.props.match.params.publicKey === this.props.profileData.info.public_key) : false
+            isMe: this.props.profileData ? (this.props.match.params.publicKey === this.props.profileData.info.public_key) : false,
+            isFollowed: this.props.profileData ? (this.props.profileData.info.follow ? 
+                                                  this.props.profileData.info.follow.split(',').includes(this.props.match.params.publicKey) : false )
+                                               : false
           });
         })
     }, 2000);
   }
 
-  componentWillUnmount() {
+  componentWillUnmount = () => {
     clearInterval(this.interval);
   }
 
@@ -51,7 +55,8 @@ class Profile extends Component {
         .then(res => {
           this.setState({
             accData: res.data,
-            isMe: nextProp.match.params.PublicKey === this.props.profileData.info.public_key
+            isMe: nextProp.match.params.publicKey === this.props.profileData.info.public_key,
+            isFollowed: this.props.profileData.info.follow ? this.props.profileData.info.follow.split(',').includes(nextProp.match.params.publicKey) : false
           })
         })
     }
@@ -74,14 +79,29 @@ class Profile extends Component {
       }
     }
 
+    let countPayment = 0;
+    let countPost = 0;
+
+    if (this.state.accData.tx) {
+      for (let key in this.state.accData.tx.send) {
+        countPayment++;
+      }
+      for (let key in this.state.accData.tx.receive) {
+        countPayment++;
+      }
+      for (let key in this.state.accData.tx.post) {
+        countPost++;
+      }
+    }
+
     return (
       <div>
         <Navibar />
-        {this.state.accData.info && <Headers setScreen={this.setScreen} accInfo={this.state.accData.info} isMe={this.state.isMe} />}
+        {this.state.accData.info && <Headers setScreen={this.setScreen} accInfo={this.state.accData.info} isMe={this.state.isMe} numEx={countPayment} numPost={countPost} />}
         <Grid container spacing={32}>
           <Grid item xs={1} />
           <Grid item xs={3}>
-            {this.state.accData.info && <Information accInfo={this.state.accData.info} isMe={this.state.isMe} />}
+            {this.state.accData.info && <Information accInfo={this.state.accData.info} isMe={this.state.isMe} isFollowed={this.state.isFollowed} publicKey={this.state.accData.info.public_key}/>}
           </Grid>
           <Grid item xs={7}>
             {element}

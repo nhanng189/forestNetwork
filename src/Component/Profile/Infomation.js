@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
+import { connect } from 'react-redux';
 
 import Card from '@material-ui/core/Card';
 import List from '@material-ui/core/List';
@@ -14,7 +15,27 @@ import WorkIcon from '@material-ui/icons/Work';
 import MoneyIcon from '@material-ui/icons/AttachMoney';
 import Button from '@material-ui/core/Button';
 
+import { makeUpdateFollowTx } from '../../util';
+
 class Information extends React.Component {
+  handleFollow = async () => {
+    try {
+      let arr = this.props.profileData.info ? (this.props.profileData.info.follow ? this.props.profileData.info.follow.split(',') : []) : [];
+      arr.push(this.props.publicKey);
+      let res = await makeUpdateFollowTx(
+        parseInt(this.props.profileData.info.sequence) + 1,
+        arr,
+        sessionStorage.getItem('forest_network_account')
+      );
+
+      if (res.result.check_tx.code) {
+        alert('ERROR ' + res.result.check_tx.log);
+      }
+    } catch (err) {
+      alert('ERROR ' + err.message);
+    }
+  }
+
   render() {
     return (
       <div>
@@ -78,12 +99,15 @@ class Information extends React.Component {
           </List>
           {!this.props.isMe &&
             <div>
-              <Button variant="outlined" color="secondary" style={{ margin: '10px auto', fontSize: '1.5em' }}>
-                Theo dõi
-              </Button>
-              <Button variant="outlined" disable style={{ margin: '10px auto', fontSize: '1.5em' }}>
-                Bỏ theo dõi
-              </Button>
+              {this.props.isFollowed
+                ?
+                <Button variant="outlined" style={{ margin: '10px auto', fontSize: '1.5em' }}>
+                  Đã theo dõi
+                </Button>
+                :
+                <Button variant="outlined" onClick={this.handleFollow} color="secondary" style={{ margin: '10px auto', fontSize: '1.5em' }}>
+                  Theo dõi
+                </Button>}
             </div>
           }
         </Card>
@@ -92,4 +116,10 @@ class Information extends React.Component {
   }
 }
 
-export default Information;
+const mapStateToProps = (state) => {
+  return {
+    profileData: state.myProfile.profileData
+  }
+}
+
+export default connect(mapStateToProps, null)(Information);

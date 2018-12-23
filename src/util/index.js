@@ -2,6 +2,7 @@ import { decode_key } from '../key';
 import { encodeTx, signTx } from './lib/tx';
 import axios from 'axios';
 import vstruct from 'varstruct';
+import base32 from 'base32.js';
 
 export const makePaymentTx = async (sequence, message, address, amount, privateKey_en) => {
     let tx = {};
@@ -122,6 +123,50 @@ export const makeUpdatePictureTx = async (sequence, picture_base64, privateKey_e
 
     tx.params.key = 'picture';
     tx.params.value = Buffer.from(picture_base64, 'base64');
+
+    try {
+        signTx(tx, decode_key(privateKey_en));
+    } catch (err) {
+        throw err;
+    }
+
+    let dataEncoded = encodeTx(tx).toString('base64');
+
+    let result = await axios.post('https://komodo.forest.network/', {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "broadcast_tx_commit",
+        "params": [dataEncoded]
+    });
+
+    return result.data;
+}
+
+export const makeUpdateFollowTx = async (sequence, arr, privateKey_en) => {
+    let tx = {};
+
+    tx.version = 1;
+    tx.sequence = sequence;
+    tx.memo = Buffer.alloc(0);
+    tx.operation = 'update_account';
+
+    tx.params = {};
+
+    tx.params.key = 'followings';
+
+    const Followings = vstruct([
+        { name: 'addresses', type: vstruct.VarArray(vstruct.UInt16BE, vstruct.Buffer(35)) },
+    ]);
+
+    let tempArr = [];
+
+    for (let i = 0; i < arr.length; i++) {
+        tempArr.push(Buffer.from(base32.decode(arr[i])));
+    }
+
+    tx.params.value = Followings.encode({
+        addresses: tempArr
+    });
 
     try {
         signTx(tx, decode_key(privateKey_en));

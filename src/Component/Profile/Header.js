@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -65,6 +64,14 @@ class Header extends Component {
   }
 
   render() {
+    let followerArr = [];
+    if (this.props.accInfo.followed) {
+      for (let key in this.props.accInfo.followed) {
+        followerArr.push(key);
+      }
+    }
+    let followingArr = this.props.accInfo.follow ? this.props.accInfo.follow.split(',') : [];
+
     return (
       <div>
         <Card style={{ marginTop: "90px", height: "320px", backgroundImage: "url(http://mkkr.biz/wp-content/uploads/css3-background-patterns-css-light-live-background-people.jpg)" }}>
@@ -92,38 +99,40 @@ class Header extends Component {
                 <div>
                   Post
                   <br />
-                  {this.props.myPosts.length}
+                  {this.props.numPost}
                 </div>
               </Button>
               <Button style={{ fontSize: "11px", width: "100px" }} onClick={() => this.setScreen('1')}>
                 <div>
                   Exchange
                   <br />
-                  {this.props.myFollowers.length}
+                  {this.props.numEx}
                 </div>
               </Button>
               <Button style={{ fontSize: "11px", width: "100px" }} onClick={this.handleFollowersOpen}>
                 <div>
                   Follower
                   <br />
-                  {this.props.myFollowers.length}
+                  {followerArr.length}
                 </div>
               </Button>
               <Button style={{ fontSize: "11px", width: "100px" }} onClick={this.handleFollowingOpen}>
                 <div>
                   Following
                   <br />
-                  {this.props.myFollowing.length}
+                  {followingArr.length}
                 </div>
               </Button>
             </div>
           </CardActions>
         </Card>
         <FollowersDialog
+          list={followerArr}
           open={this.state.followersOpen}
           onClose={this.handleClose}
         />
         <FollowingDialog
+          list={followingArr}
           open={this.state.followingOpen}
           onClose={this.handleClose}
         />
@@ -140,14 +149,4 @@ class Header extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  myProfile: state.myProfile,
-  myFollowers: state.myFollowers,
-  myFollowing: state.myFollowing,
-  myPosts: state.myPosts
-})
-
-export default connect(
-  mapStateToProps,
-  null
-)(Header)
+export default Header;
