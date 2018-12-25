@@ -84,12 +84,15 @@ class Profile extends Component {
 
     if (this.state.accData.tx) {
       for (let key in this.state.accData.tx.send) {
+        if(key > 0) {};
         countPayment++;
       }
       for (let key in this.state.accData.tx.receive) {
+        if(key > 0) {};
         countPayment++;
       }
       for (let key in this.state.accData.tx.post) {
+        if(key > 0) {};
         countPost++;
       }
     }
