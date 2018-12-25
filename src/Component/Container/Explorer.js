@@ -32,7 +32,7 @@ class Explorer extends Component {
         })
     }, 2000);
   }
-
+  
   componentWillUnmount = () => {
     clearInterval(this.interval);
   }
