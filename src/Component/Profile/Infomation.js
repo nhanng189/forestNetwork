@@ -36,6 +36,23 @@ class Information extends React.Component {
     }
   }
 
+  handleUnfollow = async () => {
+      try {
+        let arr = this.props.profileData.info ? (this.props.profileData.info.follow ? this.props.profileData.info.follow.split(',') : []) : [];
+        arr.splice(arr.indexOf(this.props.publicKey), 1);
+        let res = await makeUpdateFollowTx(
+            parseInt(this.props.profileData.info.sequence) + 1,
+            arr,
+            sessionStorage.getItem('forest_network_account')
+          );
+          if (res.result.check_tx.code) {
+            alert('ERROR ' + res.result.check_tx.log);
+          }
+      } catch (err) {
+          alert('ERROR ', err.message);
+      }
+  }
+
   render() {
     return (
       <div>
@@ -101,7 +118,7 @@ class Information extends React.Component {
             <div>
               {this.props.isFollowed
                 ?
-                <Button variant="outlined" style={{ margin: '10px auto', fontSize: '1.5em' }}>
+                <Button variant="outlined" onClick={this.handleUnfollow} style={{ margin: '10px auto', fontSize: '1.5em' }}>
                   Đã theo dõi
                 </Button>
                 :
