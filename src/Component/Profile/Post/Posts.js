@@ -16,6 +16,10 @@ class Posts extends Component {
       postsArr.push(temp);
     }
 
+    postsArr.sort(function(a, b) {
+      return b.block - a.block;
+    });
+
     let elements = postsArr.map((post) => {
       return <Post
         name={accInfo.name}
