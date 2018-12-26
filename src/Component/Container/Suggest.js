@@ -71,8 +71,8 @@ class Users extends Component {
         <CardHeader
           className="sgg-card-header"
           title={
-            <div className="sgg-title">Suggested users
-                            <a href="/" style={{ fontSize: "12px", float: "right" }}>See all</a>
+            <div className="sgg-title">
+              Giao dịch gần đây
             </div>
           }
         />

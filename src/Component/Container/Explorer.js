@@ -51,11 +51,11 @@ class Explorer extends Component {
         <Navibar />
         <Grid style={{marginTop: "90px"}} container spacing={32}>
           <Grid item xs={1} />
-          <Grid item xs={3}>
-            <Suggest />
-          </Grid>
           <Grid item xs={7}>
             {element}
+          </Grid>
+          <Grid item xs={3}>
+            <Suggest />
           </Grid>
           <Grid item xs={2} />
         </Grid>
