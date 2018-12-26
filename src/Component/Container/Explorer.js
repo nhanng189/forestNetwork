@@ -14,36 +14,31 @@ class Explorer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      accData: {}
+      data: {}
     }
   }
 
   componentDidMount = () => {
     this.interval = setInterval(() => {
-      axios.get(host + '/account/GBL6LXYDY6L2NHYKE3GCFLFIWPWIIZJGGGW547URO7Z7ORHST6PYS7V3')
+      axios.get(host + '/newfeeds/' + this.props.profileData.info.public_key)
         .then(res => {
           this.setState({
-            accData: res.data,
-            isMe: this.props.profileData ? (this.props.match.params.publicKey === this.props.profileData.info.public_key) : false,
-            isFollowed: this.props.profileData ? (this.props.profileData.info.follow ? 
-                                                  this.props.profileData.info.follow.split(',').includes(this.props.match.params.publicKey) : false )
-                                               : false
+            data: res.data
           });
         })
-    }, 2000);
+    }, 3000);
   }
   
   componentWillUnmount = () => {
     clearInterval(this.interval);
+    this.setState = {
+      data: {}
+    }
   }
 
   render() {
     if (!this.props.profileData) {
       return <Redirect to="/login" />;
-    }
-    let element=null;
-    if (this.state.accData.tx && this.state.accData.info) {
-      element = <Posts posts={this.state.accData.tx.post} accInfo={this.state.accData.info} />
     }
 
     return (
@@ -52,7 +47,7 @@ class Explorer extends Component {
         <Grid style={{marginTop: "90px"}} container spacing={32}>
           <Grid item xs={1} />
           <Grid item xs={7}>
-            {element}
+            {this.state.data && <Posts data={this.state.data} />}
           </Grid>
           <Grid item xs={3}>
             <Suggest />

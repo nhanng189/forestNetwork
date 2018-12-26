@@ -5,28 +5,18 @@ import '../../../Style/TimelinePost.css';
 
 class Posts extends Component {
   render() {
-    const posts = this.props.posts;
-    const accInfo = this.props.accInfo;
-
-    let postsArr = [];
-
-    for (let key in posts) {
-      let temp = posts[key];
-      temp.hash = key;
-      postsArr.push(temp);
-    }
-
-    let elements = postsArr.map((post) => {
+    let elements = this.props.data.posts ? this.props.data.posts.map((post) => {
       return <Post
-        name={accInfo.name}
-        public_key={accInfo.public_key}
-        imageStr={`data:image/png;base64,${accInfo.picture}`}
+        name={this.props.data.names[post.account]}
+        public_key={post.account}
+        imageStr={`data:image/png;base64,${this.props.data.avatars[post.account]}`}
         content={post.content}
         time={post.time}
         key={post.hash}
         hash={post.hash}
       />
-    })
+    }) : null;
+    
     return (
       <div style={{ marginTop: "50px" }}>
         {elements}

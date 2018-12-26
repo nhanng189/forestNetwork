@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { toggleLove, addComment } from '../../../actions'
 import moment from 'moment'
 
 import Card from '@material-ui/core/Card';
@@ -17,32 +15,6 @@ import Comment from '../../../icons/comment.png';
 import '../../../Style/TimelinePost.css';
 
 class Post extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      comment: ""
-    }
-  }
-
-  onSubmit = (event) => {
-    event.preventDefault();
-    this.props.addComment(this.props.id, "Fumika", this.state.comment)
-    this.setState({
-      comment: ""
-    })
-  }
-
-  onChange = (event) => {
-    var target = event.target;
-    var value = target.value;
-    var name = target.name;
-
-    this.setState({
-      [name]: value
-    })
-  }
-
   render() {
     return (
       <Card className="tlp-card" >
@@ -71,37 +43,37 @@ class Post extends Component {
         </CardContent>
         <CardActions disableActionSpacing className="tlp-card-action">
           <div className="tlp-action-field">
-            <IconButton disableRipple="true" disableTouchRipple="true" className="tlp-action-icon" onClick={() => this.props.toggleLove(this.props.id)}>
+            <IconButton  className="tlp-action-icon" >
               <img className="tlp-action-icon-img" alt="" src={Love3} />
             </IconButton>
-            <IconButton disableRipple="true" disableTouchRipple="true" className="tlp-action-icon" onClick={() => this.props.toggleLove(this.props.id)}>
+            <IconButton  className="tlp-action-icon" >
               <img className="tlp-action-icon-img" alt="" src={Love3} />
             </IconButton>
-            <IconButton disableRipple="true" disableTouchRipple="true" className="tlp-action-icon" onClick={() => this.props.toggleLove(this.props.id)}>
+            <IconButton  className="tlp-action-icon" >
               <img className="tlp-action-icon-img" alt="" src={Love3} />
             </IconButton>
-            <IconButton disableRipple="true" disableTouchRipple="true" className="tlp-action-icon" onClick={() => this.props.toggleLove(this.props.id)}>
+            <IconButton  className="tlp-action-icon" >
               <img className="tlp-action-icon-img" alt="" src={Love3} />
             </IconButton>
-            <IconButton disableRipple="true" disableTouchRipple="true" className="tlp-action-icon" onClick={() => this.props.toggleLove(this.props.id)}>
+            <IconButton  className="tlp-action-icon" >
               <img className="tlp-action-icon-img" alt="" src={Love3} />
             </IconButton>
-            <IconButton disableRipple="true" disableTouchRipple="true" className="tlp-action-icon" onClick={() => this.props.toggleLove(this.props.id)}>
+            <IconButton  className="tlp-action-icon" >
               <img className="tlp-action-icon-img" alt="" src={Love3} />
             </IconButton>
           </div>
           <div style={{ flexGrow: "1" }} />
           <div className="tlp-action-field">
-            <IconButton disableRipple="true" disableTouchRipple="true" className="tlp-action-icon">
+            <IconButton className="tlp-action-icon">
               <img className="tlp-action-icon-img" alt="" src={Comment} />
             </IconButton>
           </div>
         </CardActions>
         <div style={{ padding: "0 15px 0 15px" }}><hr /></div>
         <CardActions disableActionSpacing className="tlp-card-action-comment">
-          <form style={{ width: "100%" }} onSubmit={this.onSubmit}>
+          <form style={{ width: "100%" }} onSubmit={(e) => e.preventDefault()}>
             <InputBase style={{ fontSize: "14px" }} fullWidth placeholder="Add your comment ..."
-              name="comment" value={this.state.comment} type="text" onChange={this.onChange} />
+              name="comment" type="text" onChange={(e) => e.preventDefault()} />
           </form>
         </CardActions>
       </Card>
@@ -109,12 +81,4 @@ class Post extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  toggleLove: id => dispatch(toggleLove(id)),
-  addComment: (id, user, comment) => dispatch(addComment(id, user, comment))
-})
-
-export default withRouter(connect(
-  null,
-  mapDispatchToProps
-)(Post));
+export default withRouter(Post);

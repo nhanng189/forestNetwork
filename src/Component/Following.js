@@ -19,12 +19,12 @@ class FollowingDialog extends React.Component {
       <Dialog onClose={this.handleClose} {...other}>
         <List>
           <ListSubheader style={{ fontSize: "16px", backgroundColor: "white", width: "250px" }}>Following people</ListSubheader>
-          {this.props.list.map((following, index) => {
+          {this.props.list.map((following) => {
             return (
               <Link to={`/account/${following}`} key={following}>
                 <ListItem style={{ marginBottom: "5px" }} button>
                   <ListItemText>
-                    <div style={{ fontSize: "11px" }}>{'USER'}</div>
+                    <div style={{ fontSize: "11px" }}>{following}</div>
                   </ListItemText>
                 </ListItem>
               </Link>

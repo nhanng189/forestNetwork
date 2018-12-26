@@ -78,7 +78,7 @@ class Header extends Component {
           <div style={{ zIndex: "1000", position: "absolute", marginLeft: "184px", marginTop: "150px" }}>
             <Avatar style={{ border: "5px white solid", float: "left", width: "200px", height: "200px" }} alt="" src={`data:image/png;base64,${this.props.accInfo.picture}`} />
             <div style={{ float: "left", fontSize: "35px", fontWeight: "bolder", marginLeft: "50px", marginTop: "25px" }}>
-              {this.props.accInfo.name}
+              {((this.props.accInfo.name) && (this.props.accInfo.name !== '')) ? this.props.accInfo.name : this.props.accInfo.public_key.slice(0, 15).concat('...')}
               &nbsp;
               {this.props.isMe &&
                 <IconButton onClick={this.handleEditNameOpen} style={{ marginBottom: "5px" }}>
