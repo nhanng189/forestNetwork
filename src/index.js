@@ -28,7 +28,7 @@ setInterval(() => {
                 store.dispatch(setProfileData(res.data));
             });
     }
-}, 3000);
+}, 2000);
 
 if (sessionStorage.getItem('forest_network_account')) {
     let publicKey = Keypair.fromSecret(decode_key(sessionStorage.getItem('forest_network_account'))).publicKey();

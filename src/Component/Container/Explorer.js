@@ -16,6 +16,8 @@ class Explorer extends Component {
     this.state = {
       data: {}
     }
+
+    this.setState = this.setState.bind(this);
   }
 
   componentDidMount = () => {
@@ -26,7 +28,7 @@ class Explorer extends Component {
             data: res.data
           });
         })
-    }, 3000);
+    }, 2000);
   }
   
   componentWillUnmount = () => {
