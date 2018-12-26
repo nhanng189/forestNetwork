@@ -23,6 +23,14 @@ class Exchanges extends Component {
       receiveArr.push(temp);
     }
 
+    sendArr.sort(function(a, b) {
+      return b.block - a.block;
+    });
+
+    receiveArr.sort(function(a, b) {
+      return b.block - a.block;
+    })
+
     let sendElements = sendArr.map((send) => {
       return <Exchange
         amount={send.amount}
