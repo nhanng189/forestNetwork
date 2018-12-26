@@ -98,7 +98,7 @@ class Information extends React.Component {
               <ListItemText>
                 <div className="tlp-title">
                   <span style={{ fontWeight: 'bold' }}>Energy: </span>
-                  {this.props.accInfo.energy} (OXY)
+                  ... (OXY)
                 </div>
               </ListItemText>
             </ListItem>

@@ -30,23 +30,27 @@ class EditDialog extends React.Component {
   };
 
   onEdit = async () => {
-    try {
-      let res = await makeUpdateNameTx(
-        parseInt(this.props.profileData.info.sequence) + 1,
-        this.state.name,
-        sessionStorage.getItem('forest_network_account')
-      );
+    if (window.confirm('Bạn có chắc chắn muốn đổi tên')) {
+      try {
+        let res = await makeUpdateNameTx(
+          parseInt(this.props.profileData.info.sequence) + 1,
+          this.state.name,
+          sessionStorage.getItem('forest_network_account')
+        );
 
-      if (res.result.check_tx.code) {
-        alert('ERROR ' + res.result.check_tx.log);
-      } else {
-        alert('Đổi tên thành công');
-        this.setState({
-          name: '',
-        });
+        if (res.result.check_tx.code) {
+          alert('ERROR ' + res.result.check_tx.log);
+        } else {
+          alert('Đổi tên thành công');
+          this.setState({
+            name: '',
+          });
+        }
+      } catch (err) {
+        alert('ERROR ' + err.message);
       }
-    } catch (err) {
-      alert('ERROR ' + err.message);
+    } else {
+
     }
   }
 

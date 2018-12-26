@@ -25,23 +25,27 @@ class CreateAcc extends Component {
     }
 
     onSubmit = async () => {
-        try {
-            let res = await makeCreateAccTx(
-                parseInt(this.props.profileData.info.sequence) + 1,
-                this.state.publicKey,
-                sessionStorage.getItem('forest_network_account')
-            )
+        if (window.confirm('Bạn có chắc chắn thực hiện giao dịch?')) {
+            try {
+                let res = await makeCreateAccTx(
+                    parseInt(this.props.profileData.info.sequence) + 1,
+                    this.state.publicKey,
+                    sessionStorage.getItem('forest_network_account')
+                )
 
-            if (res.result.check_tx.code) {
-                alert('ERROR ' + res.result.check_tx.log);
-            } else {
-                alert('Tạo tài khoản thành công');
-                this.setState({
-                    publicKey: '',
-                });
+                if (res.result.check_tx.code) {
+                    alert('ERROR ' + res.result.check_tx.log);
+                } else {
+                    alert('Tạo tài khoản thành công');
+                    this.setState({
+                        publicKey: '',
+                    });
+                }
+            } catch (err) {
+                alert('ERROR ' + err.message);
             }
-        } catch (err) {
-            alert('ERROR ' + err.message);
+        } else {
+
         }
     }
 

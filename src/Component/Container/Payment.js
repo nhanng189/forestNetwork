@@ -35,29 +35,32 @@ class Payment extends Component {
     }
 
     onSubmit = async () => {
-        try {
-            let res = await makePaymentTx(
-                parseInt(this.props.profileData.info.sequence) + 1,
-                this.state.message,
-                this.state.publicKey,
-                parseInt(this.state.amount),
-                sessionStorage.getItem('forest_network_account')
-            )
+        if (window.confirm('Bạn có chắc chắn muốn thực hiện giao dịch?')) {
+            try {
+                let res = await makePaymentTx(
+                    parseInt(this.props.profileData.info.sequence) + 1,
+                    this.state.message,
+                    this.state.publicKey,
+                    parseInt(this.state.amount),
+                    sessionStorage.getItem('forest_network_account')
+                )
 
-            if (res.result.check_tx.code) {
-                alert('ERROR ' + res.result.check_tx.log);
-            } else {
-                alert('Chuyển tiền thành công');
-                this.setState({
-                    publicKey: '',
-                    amount: '',
-                    message: ''
-                });
+                if (res.result.check_tx.code) {
+                    alert('ERROR ' + res.result.check_tx.log);
+                } else {
+                    alert('Chuyển tiền thành công');
+                    this.setState({
+                        publicKey: '',
+                        amount: '',
+                        message: ''
+                    });
+                }
+            } catch (err) {
+                alert('ERROR ' + err.message);
             }
-        } catch (err) {
-            alert('ERROR ' + err.message);
-        }
+        } else {
 
+        }
     }
 
     render() {

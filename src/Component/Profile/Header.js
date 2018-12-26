@@ -10,7 +10,6 @@ import EditIcon from '@material-ui/icons/Create';
 import PhotoIcon from '@material-ui/icons/InsertPhoto';
 
 import FollowingDialog from '../Following';
-import FollowersDialog from '../Followers';
 import EditNameDialog from '../Edit';
 import EditAvatarDialog from '../EditAvatar';
 
@@ -64,12 +63,6 @@ class Header extends Component {
   }
 
   render() {
-    let followerArr = [];
-    if (this.props.accInfo.followed) {
-      for (let key in this.props.accInfo.followed) {
-        followerArr.push(key);
-      }
-    }
     let followingArr = this.props.accInfo.follow ? this.props.accInfo.follow.split(',') : [];
 
     return (
@@ -109,13 +102,6 @@ class Header extends Component {
                   {this.props.numEx}
                 </div>
               </Button>
-              <Button style={{ fontSize: "11px", width: "100px" }} onClick={this.handleFollowersOpen}>
-                <div>
-                  Follower
-                  <br />
-                  {followerArr.length}
-                </div>
-              </Button>
               <Button style={{ fontSize: "11px", width: "100px" }} onClick={this.handleFollowingOpen}>
                 <div>
                   Following
@@ -126,11 +112,6 @@ class Header extends Component {
             </div>
           </CardActions>
         </Card>
-        <FollowersDialog
-          list={followerArr}
-          open={this.state.followersOpen}
-          onClose={this.handleClose}
-        />
         <FollowingDialog
           list={followingArr}
           open={this.state.followingOpen}
